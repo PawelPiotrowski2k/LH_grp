@@ -1,9 +1,7 @@
 package com.company;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -15,14 +13,14 @@ public class Main {
                 changeFirstLetter(words)) {
             System.out.println(a);
         }
-
     }
 
     public static List<String> changeFirstLetter(List<String> words) {
-        for (int i = 0; i < words.size(); i++) {
-            String word = words.get(i);
+        int indexOfWord = 0;
+        for (String word :words) {
+            indexOfWord = words.indexOf(word);
             word = Character.toUpperCase(word.charAt(0)) + word.substring(1);
-            words.set(i,word);
+            words.set(indexOfWord, word);
         }
         return words;
     }
