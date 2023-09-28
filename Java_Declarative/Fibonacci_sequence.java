@@ -6,12 +6,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Integer> firstNumbers = new ArrayList<Integer>();
-        firstNumbers.add(1);
-        firstNumbers.add(2);
-        firstNumbers.add(3);
-        int[] result = sequence(firstNumbers,4);
-        for (int a:
-                result) {
+        firstNumbers.add(Integer.parseInt(args[0]));
+        firstNumbers.add(Integer.parseInt(args[1]));
+        firstNumbers.add(Integer.parseInt(args[2]));
+        int[] result = sequence(firstNumbers,Integer.parseInt(args[3]));
+        for (int a : result) {
             System.out.println(a);
         }
     }
