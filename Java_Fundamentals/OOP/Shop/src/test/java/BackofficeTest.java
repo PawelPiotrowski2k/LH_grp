@@ -53,6 +53,5 @@ class BackofficeTest {
         backoffice.createOrder(cart);
         backoffice.getFinishedCarts();
         assertEquals("mleko",backoffice.getFinishedCarts().get(0).getListOfProducts().get(0).getName());
-        assertNotNull(backoffice.getFinishedCarts());
     }
 }
