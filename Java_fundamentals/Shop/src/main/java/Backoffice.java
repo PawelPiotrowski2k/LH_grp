@@ -10,41 +10,35 @@ public class Backoffice {
     private List<Cart> finishedCarts = new ArrayList<Cart>();
 
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
     public List<Product> getAllProducts() {
         return allProducts;
     }
+
     public List<Cart> getFinishedCarts() {
         return finishedCarts;
     }
-    public void addProductToAllProducts(Product product){
+
+    public void addProductToAllProducts(Product product) {
         allProducts.add(product);
     }
-    public Map<String, String> listOfProducts(List<Product> products){
+
+    public Map<String, String> getListOfProductswithCategory(List<Product> products) {
         Map<String, String> productsWithCategory = new HashMap<>();
         for (Product product :
                 products) {
-            productsWithCategory.put(product.getName(),product.getCatergory());
+            productsWithCategory.put(product.getName(), product.getCatergory());
         }
         return productsWithCategory;
     }
-    public HashMap<String, Double> listOfDiscount(){
-        HashMap<String, Double> discounts = new HashMap<String, Double>();
-        for (Discount discount :
-                Discount.values()) {
-            discounts.put(discount.name(), discount.getDiscountValue());
-        }
-        return discounts;
+
+    public List<Discount> getListOfDiscount() {
+        return Discount.getListOfDiscount();
     }
-    public void finishOrder(Cart cart){
+
+    public void createOrder(Cart cart) {
         Order order = new Order(cart);
         orders.add(order);
         finishedCarts.add(cart);
-    }
-    public List<Cart> finishedCarts(List<Cart> carts){
-        return carts;
+        cart.closeCart();
     }
 }

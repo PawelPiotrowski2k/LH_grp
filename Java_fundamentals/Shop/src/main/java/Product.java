@@ -1,5 +1,4 @@
-
-import java.util.ArrayList;
+import java.util.UUID;
 
 public class Product {
     private final String name;
@@ -7,8 +6,7 @@ public class Product {
     private double price;
     private final double tax;
     private final double discount;
-    private final int id;
-    private static int lastCartId = 0;
+    private final String id;
 
 
     public Product(String name, String catergory, double price, double discount) {
@@ -16,23 +14,19 @@ public class Product {
         this.catergory = catergory;
         this.price = price;
         this.tax = 1.23;
-        this.id = ++lastCartId;
+        this.id = UUID.randomUUID().toString();
         this.discount = discount;
     }
 
-    public double getDiscount() {
-        return discount;
-    }
-
-    public String getCatergory(){
+    public String getCatergory() {
         return catergory;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public double finalPrice(){
-        return this.price * this.discount * this.tax;
+    public double getFinalPrice() {
+        return Math.round(this.price * this.discount * this.tax * 100.0) / 100.0;
     }
 }
