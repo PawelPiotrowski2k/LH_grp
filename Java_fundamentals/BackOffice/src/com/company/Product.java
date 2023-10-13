@@ -1,4 +1,7 @@
 package com.company;
+
+import java.util.ArrayList;
+
 public class Product {
     private final String name;
     private final String catergory;

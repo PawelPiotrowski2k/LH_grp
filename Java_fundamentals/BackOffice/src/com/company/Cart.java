@@ -5,10 +5,15 @@ import java.util.ArrayList;
 
 public class Cart {
     private final int id;
+    private static int lastCartId = 0;
     private ArrayList<Product> listOfProducts = new ArrayList<Product>();
     private final double discount;
 
-
+    public Cart(String nameDiscount) {
+        this.id = ++lastCartId;
+        Discount discount1 = Discount.valueOf(nameDiscount);
+        this.discount = discount1.getDiscountValue();
+    }
     public String finalPrice(double discount){
         DecimalFormat df = new DecimalFormat("#.##");
         double finalPrice = 0;
@@ -18,9 +23,8 @@ public class Cart {
         }
         return df.format(finalPrice * this.discount);
     }
-    public Cart(int id) {
-        this.id = id;
-        this.discount = 1;
+    public double getDiscount(){
+        return discount;
     }
     public void addProduct (Product product){
             listOfProducts.add(product);
