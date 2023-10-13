@@ -1,4 +1,4 @@
-package com.company;
+
 
 public enum Discount {
     PIATUNIO(0.9),

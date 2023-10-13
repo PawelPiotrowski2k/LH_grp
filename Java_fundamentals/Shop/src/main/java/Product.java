@@ -1,4 +1,3 @@
-package com.company;
 
 import java.util.ArrayList;
 
@@ -9,14 +8,15 @@ public class Product {
     private final double tax;
     private final double discount;
     private final int id;
+    private static int lastCartId = 0;
 
 
-    public Product(String name, String catergory, double price, int id, double discount) {
+    public Product(String name, String catergory, double price, double discount) {
         this.name = name;
         this.catergory = catergory;
         this.price = price;
-        this.tax = 0.77;
-        this.id = id;
+        this.tax = 1.23;
+        this.id = ++lastCartId;
         this.discount = discount;
     }
 
