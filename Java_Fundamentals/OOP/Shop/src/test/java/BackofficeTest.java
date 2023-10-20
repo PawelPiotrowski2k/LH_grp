@@ -1,5 +1,9 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,51 +11,106 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BackofficeTest {
 
+    private Cart objectUnderTest;
+    private Discount piatunioDiscount;
+    private Discount hurtowaDiscount;
+    private Discount swiatecznaDiscount;
+    private Backoffice backoffice;
+
+    private String mlekoName;
+    private String chlebName;
+    private String mlekoCategory;
+    private String chlebCategory;
+    private double mlekoPrice;
+    private double chlebPrice;
+    private double tax;
+    private double discount;
+    private double discountWithoutDiscount;
+    private Product mleko;
+    private Product chleb;
+
+
+    @BeforeEach
+    void setUp() {
+        piatunioDiscount = Discount.PIATUNIO;
+        hurtowaDiscount = Discount.HURTOWA;
+        swiatecznaDiscount = Discount.SWIATECZNA;
+        mlekoName = "mleko";
+        chlebName = "chleb";
+        mlekoCategory = "nabial";
+        chlebCategory = "pieczywo";
+        mlekoPrice = 3.20;
+        chlebPrice = 3.00;
+        tax = 1.23;
+        discount = 0.9;
+        discountWithoutDiscount = 1.0;
+        backoffice = new Backoffice();
+        mleko = new ProductBuilder().setName(mlekoName)
+                .setCatergory(mlekoCategory)
+                .setPrice(mlekoPrice)
+                .setTax(tax)
+                .setDiscount(discount)
+                .build();
+        chleb = new ProductBuilder().setName(chlebName)
+                .setCatergory(chlebCategory)
+                .setPrice(chlebPrice)
+                .setTax(tax)
+                .setDiscount(discount)
+                .build();
+    }
+
+
     @Test
     void testlistOfProductsGivesCorretCategory() {
-        var mleko = new Product("mleko","nabial",7.00,1.00);
-        var chleb = new Product("chleb","pieczywo",7.00,1.00);
-        var backoffice = new Backoffice();
+        //Given
+        //When
         backoffice.addProductToAllProducts(mleko);
         backoffice.addProductToAllProducts(chleb);
         Map<String, String> products = backoffice.getListOfProductswithCategory(backoffice.getAllProducts());
         String key = products.get("chleb");
-        assertEquals("pieczywo",key);
+        //Then
+        assertEquals("pieczywo", key);
     }
 
-    @Test
-    void listOfDiscountGivesCorrectDiscounts() {
-    var discountProvider = new Backoffice();
-        List<Discount> discounts = discountProvider.getListOfDiscount();
-    for(Discount discount: Discount.values()){
-        assertTrue(discounts.contains(discount));
-    }
-    for(Discount discount : Discount.values()){
-        assertTrue(discount.discountValue > 0);
-    }
-    }
+    @ParameterizedTest
+    @EnumSource(Discount.class)
+    void listOfDiscountGivesCorrectDiscounts(Discount discount) {
+        //Given
+        //When
+        List<Discount> discounts = backoffice.getListOfDiscount();
+        //Then
+        assertTrue(discount.getDiscountValue() < 1, "wartość " + discounts + " nie jest mniejsza niż 1");
+        }
+
 
     @Test
     void finishOrderAddProductAfterClosingCart() {
-        Cart firstCart = new Cart("PIATUNIO");
-        var mleko = new Product("mleko","nabial",7.00,1.00);
-        var chleb = new Product("chleb","pieczywo",7.00,1.00);
-        firstCart.addProduct(mleko);
-        var backoffice = new Backoffice();
-        backoffice.createOrder(firstCart);
-        firstCart.addProduct(chleb);
-        backoffice.createOrder(firstCart);
-        assertTrue(1 == backoffice.getFinishedCarts().get(1).getListOfProducts().size());
+        //Given
+        objectUnderTest = new Cart(hurtowaDiscount);
+        //When
+        objectUnderTest.addProduct(mleko);
+        backoffice.createOrder(objectUnderTest);
+        objectUnderTest.closeCart();
+        objectUnderTest.addProduct(chleb);
+        List<Product> productsOfFinishedCart = new ArrayList<Product>(backoffice.getFinishedCarts().get(0).getListOfProducts());
+        //Then
+        assertFalse(productsOfFinishedCart.contains(chleb));
+
+
 
     }
+
     @Test
     void finishedCartsGivesCorrectCarts() {
-        Cart cart = new Cart("PIATUNIO");
-        var mleko = new Product("mleko","nabial",7.00,1.00);
+        //Given
+        objectUnderTest = new Cart(piatunioDiscount);
+        //When
+        objectUnderTest.addProduct(mleko);
         Backoffice backoffice = new Backoffice();
-        cart.addProduct(mleko);
-        backoffice.createOrder(cart);
-        backoffice.getFinishedCarts();
-        assertEquals("mleko",backoffice.getFinishedCarts().get(0).getListOfProducts().get(0).getName());
+        objectUnderTest.addProduct(mleko);
+        backoffice.createOrder(objectUnderTest);
+        List<Product> listOfProductsInFinishedCart = new ArrayList<Product>(backoffice.getFinishedCarts().get(0).getListOfProducts());
+        //Then
+        assertTrue(listOfProductsInFinishedCart.contains(mleko));
     }
 }

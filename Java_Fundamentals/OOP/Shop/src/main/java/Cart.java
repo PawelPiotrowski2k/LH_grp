@@ -1,25 +1,26 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Cart {
 
-    private List<Product> listOfProducts = new ArrayList<Product>();
-    private final double discount;
+    private final Set<Product> listOfProducts = new HashSet<Product>();
+    private final Discount discount;
     private boolean closed;
 
 
-    public Cart(String nameDiscount) {
-        Discount cartDiscount = Discount.valueOf(nameDiscount);
-        this.discount = cartDiscount.getDiscountValue();
+    public Cart(Discount discount) {
+        this.discount = discount;
         this.closed = false;
     }
 
     public double finalPrice() {
         double finalPrice = listOfProducts.stream().mapToDouble(Product::getFinalPrice).sum();
-        return Math.round(finalPrice * discount * 100.0) / 100.0;
+        return Math.round(finalPrice * discount.getDiscountValue() * 100.0) / 100.0;
     }
 
-    public double getDiscount() {
+    public Discount getDiscount() {
         return discount;
     }
 
@@ -28,7 +29,7 @@ public class Cart {
             listOfProducts.add(product);
     }
 
-    public List<Product> getListOfProducts() {
+    public Set<Product> getListOfProducts() {
         return listOfProducts;
     }
 

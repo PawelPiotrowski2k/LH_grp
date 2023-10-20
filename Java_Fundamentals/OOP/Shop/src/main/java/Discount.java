@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Discount {
     PIATUNIO(0.9),
@@ -17,11 +19,6 @@ public enum Discount {
     }
 
     public static List<Discount> getListOfDiscount() {
-        List<Discount> discounts = new ArrayList<Discount>();
-        for (Discount discount :
-                Discount.values()) {
-            discounts.add(discount);
-        }
-        return discounts;
+        return Arrays.stream(Discount.values()).collect(Collectors.toList());
     }
 }
