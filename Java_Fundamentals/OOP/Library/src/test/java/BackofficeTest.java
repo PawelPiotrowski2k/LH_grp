@@ -1,38 +1,47 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BackofficeTest {
-    User objectUnderTest;
     Book book;
+    User objectUnderTest;
 
-    User createFirstUser(){
-        return new User("Pawel","Piotrowski","piotrowski@wp.pl");
+
+    User createFirstUser() {
+        return new User("Pawel", "Piotrowski", "piotrowski@wp.pl");
     }
 
+    public Book createBook() {
+        Book book = new BookBuilder().setTitle("Harry Potter").setAuthor("J.K. Rowling").build();
+        return book;
+    }
 
     @BeforeEach
-    void setup(){
-        objectUnderTest = new User("Konrad","Dudek","dudek@wp.pl");
-        book = new BookBuilder().setTitle("Harry Potter").setAuthor("J.K. Rowling").build();
+    void setup() {
+        objectUnderTest = new User("Konrad", "Dudek", "dudek@wp.pl");
+        book = new BookBuilder().setAuthor("J.K. Rowling").setTitle("Harry Potter").build();
     }
-
-
 
     @Test
-    void addBook(){
-        //Given
-        User objectUnderTest = createFirstUser();
-        //book and object under test
+    void returnBook() {
+        //Given book, user
         //When
-        objectUnderTest.rentBook(book);
-        List<Book> listOfUsersRentedBooks = new ArrayList<Book>(objectUnderTest.getListOfRentedBooks());
+        Backoffice.backoffice.rentBook(book,objectUnderTest);
+        Backoffice.backoffice.returnBook(book,objectUnderTest);
         //Then
-        assertTrue(listOfUsersRentedBooks.contains(book));
+        assertFalse(objectUnderTest.getListOfRentedBooks().contains(book));
     }
 
+    @Test
+    void rentBook() {
+        //Given book, user
+
+        //when
+        Backoffice.backoffice.rentBook(book,objectUnderTest);
+        //then
+        assertTrue(objectUnderTest.getListOfRentedBooks().contains(book));
+
+
+    }
 }
