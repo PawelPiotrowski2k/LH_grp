@@ -1,47 +1,54 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BackofficeTest {
+    PenaltyManager penaltyManager;
+    Backoffice backoffice;
     Book book;
-    User objectUnderTest;
-
-
-    User createFirstUser() {
-        return new User("Pawel", "Piotrowski", "piotrowski@wp.pl");
-    }
-
-    public Book createBook() {
-        Book book = new BookBuilder().setTitle("Harry Potter").setAuthor("J.K. Rowling").build();
-        return book;
-    }
+    User user;
+    User secondUser;
 
     @BeforeEach
-    void setup() {
-        objectUnderTest = new User("Konrad", "Dudek", "dudek@wp.pl");
-        book = new BookBuilder().setAuthor("J.K. Rowling").setTitle("Harry Potter").build();
+    void setup (){
+        book = new Book("Harry Potter", "J.K Rowling");
+        user = new User("pawel","piotrowski","piotrowski@wp.pl");
+        backoffice = new Backoffice();
+        penaltyManager = new PenaltyManager();
+
     }
 
+
+
+
     @Test
+    @DisplayName("simple return book")
     void returnBook() {
-        //Given book, user
-        //When
-        Backoffice.backoffice.rentBook(book,objectUnderTest);
-        Backoffice.backoffice.returnBook(book,objectUnderTest);
-        //Then
-        assertFalse(objectUnderTest.getListOfRentedBooks().contains(book));
+        backoffice.addUser(user);
+        backoffice.addBook(book);
+        backoffice.rentBook(book,user);
+        assertTrue(backoffice.returnBook(book,user));
+        assertTrue(user.isSuspended == false);
     }
+
 
     @Test
     void rentBook() {
-        //Given book, user
-
-        //when
-        Backoffice.backoffice.rentBook(book,objectUnderTest);
-        //then
-        assertTrue(objectUnderTest.getListOfRentedBooks().contains(book));
-
-
+        backoffice.addBook(book);
+        backoffice.addUser(user);
+        assertTrue(backoffice.rentBook(book,user));
+        assertTrue(user.getListOfRentedBooks().contains(book));
+    }
+    @Test
+    @DisplayName("try to rent book that is already rented")
+    void advancedrentBook() {
+        backoffice.addBook(book);
+        backoffice.addUser(user);
+        secondUser = new User("Radek", "Kotarski","kotarski@wp.pl");
+        backoffice.addUser(secondUser);
+        backoffice.rentBook(book,user);
+        assertFalse(backoffice.rentBook(book,secondUser));
     }
 }
