@@ -79,7 +79,7 @@ public class Backoffice {
 
     public boolean isPenalty(User user) {
        if(penaltyManager.getBanDate().containsKey(user)){
-           if (penaltyManager.getBanDate().get(user).isAfter(LocalDate.now()) || !penaltyManager.getBanDate().get(user).equals(LocalDate.now())) {
+           if (penaltyManager.getBanDate().get(user).isAfter(LocalDate.now())) {
                return true;
            }
        }
