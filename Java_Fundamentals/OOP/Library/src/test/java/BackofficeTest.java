@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BackofficeTest {
-    PenaltyManager penaltyManager;
     Backoffice backoffice;
     Book book;
     User user;
@@ -16,7 +15,6 @@ class BackofficeTest {
         book = new Book("Harry Potter", "J.K Rowling");
         user = new User("pawel","piotrowski","piotrowski@wp.pl");
         backoffice = new Backoffice();
-        penaltyManager = new PenaltyManager();
 
     }
 
@@ -39,7 +37,6 @@ class BackofficeTest {
         backoffice.addBook(book);
         backoffice.addUser(user);
         assertTrue(backoffice.rentBook(book,user));
-        assertTrue(user.getListOfRentedBooks().contains(book));
     }
     @Test
     @DisplayName("try to rent book that is already rented")

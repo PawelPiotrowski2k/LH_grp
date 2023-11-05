@@ -5,33 +5,31 @@ import java.util.Map;
 public class PenaltyManager {
     private final Map<User, Integer> penaltyPointsMap;
     private final Map<User, LocalDate> banDate;
-    private final Map<Book, LocalDate> deadLineDate;
+
 
     public PenaltyManager() {
         this.penaltyPointsMap = new HashMap<>();
         this.banDate = new HashMap<>();
-        this.deadLineDate = new HashMap<>();
     }
 
 
     public void setBanDate(LocalDate localDate, User user) {
-        banDate.put(user, localDate);
+        banDate.compute(user, (key, oldDate) -> {
+            return LocalDate.now();
+        });
     }
 
-    public LocalDate getBanDate(User user) {
-        return banDate.get(user);
-    }
-
-    public void setDeadLineDate(Book book, LocalDate localDate) {
-        deadLineDate.put(book, localDate);
-    }
-
-    public LocalDate getDeadLineDate(Book book) {
-        return deadLineDate.get(book);
+    public Map<User, LocalDate> getBanDate() {
+        return banDate;
     }
 
     public void increasePenaltyPoints(User user, int points) {
-        penaltyPointsMap.put(user, penaltyPointsMap.getOrDefault(user, 0) + points);
+        penaltyPointsMap.compute(user, (key, value) -> {
+            if (value != null) {
+                return value + points;
+            } else
+                return points;
+        });
     }
 
     public int getPenaltyPoints(User user) {
