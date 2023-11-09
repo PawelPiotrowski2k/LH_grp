@@ -22,10 +22,11 @@ public class PenaltyManager {
     }
 
     public void addPenaltyPoints(String id, int points) {
-        penaltyPointsMap.compute(id, (key, value) -> value != null ? value + points : points );
+        penaltyPointsMap.compute(id, (key, value) -> value != null ? value + points : points);
     }
-    public void removePenaltyPoints(String id, int points){
-        penaltyPointsMap.compute(id, (key, value) -> value != null ? value - points : points );
+
+    public void subPenaltyPoints(String id, int points) {
+        penaltyPointsMap.compute(id, (key, value) -> value != null ? value - points : points);
     }
 
     public int getPenaltyPoints(User user) {
@@ -40,18 +41,20 @@ public class PenaltyManager {
         }
         return 0;
     }
+
     public boolean isPenalty(User user) {
         if (banDate.containsKey(user) && banDate.get(user).isAfter(LocalDateTime.now())) {
-                return true;
+            return true;
         }
         user.setSuspended(false);
         return false;
     }
-    public void banProcedure(User user){
-        if(getPenaltyPoints(user) > 10){
+
+    public void banProcedure(User user) {
+        if (getPenaltyPoints(user) > 10) {
             int montsOfBan = calculateRentBan(getPenaltyPoints(user));
-            setBanDate(LocalDateTime.now().plusMonths(montsOfBan),user);
-            removePenaltyPoints(user.getId(), montsOfBan * 10);
+            setBanDate(LocalDateTime.now().plusMonths(montsOfBan), user);
+            subPenaltyPoints(user.getId(), montsOfBan * 10);
             user.setSuspended(true);
         }
     }

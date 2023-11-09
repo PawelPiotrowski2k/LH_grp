@@ -14,12 +14,12 @@ public class Backoffice {
     private final Map<Book, User> rentedBooks;
     private final Map<Book, LocalDateTime> bookDeadline;
 
-    public Backoffice() {
-        penaltyManager = new PenaltyManager();
-        books = new HashSet<>();
-        users = new HashSet<>();
-        rentedBooks = new HashMap<>();
-        bookDeadline = new HashMap<>();
+    public Backoffice(PenaltyManager penaltyManager) {
+        this.penaltyManager = penaltyManager;
+        this.books = new HashSet<>();
+        this.users = new HashSet<>();
+        this.rentedBooks = new HashMap<>();
+        this.bookDeadline = new HashMap<>();
     }
 
     public void addBook(Book book) {
@@ -41,25 +41,24 @@ public class Backoffice {
     public void returnBook(Book book) {
         assert rentedBooks.containsKey(book);
         User returningUser = rentedBooks.get(book);
-            if (isAfterDeadline(book)) {
-                penaltyManager.addPenaltyPoints(returningUser.getId(), (int) ChronoUnit.DAYS.between(bookDeadline.get(book), LocalDateTime.now()));
-                penaltyManager.banProcedure(returningUser);
-            }
-            rentedBooks.remove(book);
-            bookDeadline.remove(book);
-            book.setAvailable(true);
+        if (isAfterDeadline(book)) {
+            penaltyManager.addPenaltyPoints(returningUser.getId(), (int) ChronoUnit.DAYS.between(bookDeadline.get(book), LocalDateTime.now()));
+            penaltyManager.banProcedure(returningUser);
+        }
+        rentedBooks.remove(book);
+        bookDeadline.remove(book);
+        book.setAvailable(true);
     }
 
     public void rentBook(Book book, User user) {
         if (book.isAvailable() && !penaltyManager.isPenalty(user)) {
             rentedBooks.put(book, user);
             book.setAvailable(false);
-                bookDeadline.compute(book, (key, value) -> value == null ? LocalDateTime.now().plusDays(timeToReturnBook): value);
+            bookDeadline.compute(book, (key, value) -> value == null ? LocalDateTime.now().plusDays(timeToReturnBook) : value);
         }
     }
-    public boolean isAfterDeadline(Book book){
+
+    public boolean isAfterDeadline(Book book) {
         return LocalDateTime.now().isAfter(bookDeadline.get(book));
     }
-
-
 }

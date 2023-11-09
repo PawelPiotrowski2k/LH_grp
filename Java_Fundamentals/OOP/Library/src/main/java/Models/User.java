@@ -17,7 +17,7 @@ public class User {
         this.id = UUID.randomUUID().toString();
     }
 
-    public void setSuspended(boolean suspended){
+    public void setSuspended(boolean suspended) {
         isSuspended = suspended;
     }
 

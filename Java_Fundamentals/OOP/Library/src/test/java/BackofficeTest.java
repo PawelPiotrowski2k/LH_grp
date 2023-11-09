@@ -17,7 +17,8 @@ class BackofficeTest {
     void setup (){
         book = new Book("Harry Potter", "J.K Rowling");
         user = new User("pawel","piotrowski","piotrowski@wp.pl",false);
-        backoffice = new Backoffice();
+        penaltyManager = new PenaltyManager();
+        backoffice = new Backoffice(penaltyManager);
     }
 
 
