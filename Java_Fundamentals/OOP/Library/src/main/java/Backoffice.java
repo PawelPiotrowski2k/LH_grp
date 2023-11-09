@@ -1,24 +1,26 @@
-import java.time.LocalDate;
+import Models.Book;
+import Models.User;
+import Operations.PenaltyManager;
+
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Backoffice {
-    private final List<Book> books;
-    private final List<User> users;
-    PenaltyManager penaltyManager;
-    private final Map<Book,User> rentedBooks;
-    private final Map<Book,LocalDate> bookDeadline;
-   public Backoffice(){
-       penaltyManager = new PenaltyManager();
-       books = new ArrayList<Book>();
-       users = new ArrayList<User>();
-       rentedBooks = new HashMap<>();
-       bookDeadline = new HashMap<>();
-   }
+    private final static int timeToReturnBook = 14;
+    private final Set<Book> books;
+    private final Set<User> users;
+    private final PenaltyManager penaltyManager;
+    private final Map<Book, User> rentedBooks;
+    private final Map<Book, LocalDateTime> bookDeadline;
 
+    public Backoffice() {
+        penaltyManager = new PenaltyManager();
+        books = new HashSet<>();
+        users = new HashSet<>();
+        rentedBooks = new HashMap<>();
+        bookDeadline = new HashMap<>();
+    }
 
     public void addBook(Book book) {
         books.add(book);
@@ -36,54 +38,28 @@ public class Backoffice {
         users.remove(user);
     }
 
-    public boolean returnBook(Book book, User user) {
-        if (rentedBooks.containsKey(book) && rentedBooks.get(book).equals(user)) {
-            if (LocalDate.now().isAfter(bookDeadline.get(book))) {
-                penaltyManager.increasePenaltyPoints(user, (int) ChronoUnit.DAYS.between(LocalDate.now(), bookDeadline.get(book)));
-                int penaltyPoints = penaltyManager.getPenaltyPoints(user);
-                if (penaltyPoints > 10) {
-                    penaltyManager.setBanDate(LocalDate.now().plusMonths(calculateRentBan(penaltyPoints)), user);
-                    user.setSuspended(true);
-                    penaltyManager.resetPenaltyPoints(user);
-                }
+    public void returnBook(Book book) {
+        assert rentedBooks.containsKey(book);
+        User returningUser = rentedBooks.get(book);
+            if (isAfterDeadline(book)) {
+                penaltyManager.addPenaltyPoints(returningUser.getId(), (int) ChronoUnit.DAYS.between(bookDeadline.get(book), LocalDateTime.now()));
+                penaltyManager.banProcedure(returningUser);
             }
             rentedBooks.remove(book);
             bookDeadline.remove(book);
             book.setAvailable(true);
-            return true;
-        }
-        return false;
     }
 
-    public boolean rentBook(Book book, User user) {
-        if (book.isAvailable() && !isPenalty(user)) {
-            rentedBooks.put(book,user);
+    public void rentBook(Book book, User user) {
+        if (book.isAvailable() && !penaltyManager.isPenalty(user)) {
+            rentedBooks.put(book, user);
             book.setAvailable(false);
-            if(!bookDeadline.containsKey(book)){
-                bookDeadline.put(book,LocalDate.now().plusDays(14));
-            }
-            user.isSuspended = false;
-            return true;
+                bookDeadline.compute(book, (key, value) -> value == null ? LocalDateTime.now().plusDays(timeToReturnBook): value);
         }
-        return false;
+    }
+    public boolean isAfterDeadline(Book book){
+        return LocalDateTime.now().isAfter(bookDeadline.get(book));
     }
 
-    private int calculateRentBan(int penaltyPoints) {
-        int montsOfBan;
-        if (penaltyPoints > 10) {
-            montsOfBan = penaltyPoints / 10;
-            return montsOfBan;
-        }
-        return 0;
-    }
 
-    public boolean isPenalty(User user) {
-       if(penaltyManager.getBanDate().containsKey(user)){
-           if (penaltyManager.getBanDate().get(user).isAfter(LocalDate.now())) {
-               return true;
-           }
-       }
-
-        return false;
-    }
 }

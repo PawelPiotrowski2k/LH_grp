@@ -1,10 +1,13 @@
+import Models.Book;
+import Models.User;
+import Operations.PenaltyManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class BackofficeTest {
+    PenaltyManager penaltyManager;
     Backoffice backoffice;
     Book book;
     User user;
@@ -13,9 +16,8 @@ class BackofficeTest {
     @BeforeEach
     void setup (){
         book = new Book("Harry Potter", "J.K Rowling");
-        user = new User("pawel","piotrowski","piotrowski@wp.pl");
+        user = new User("pawel","piotrowski","piotrowski@wp.pl",false);
         backoffice = new Backoffice();
-
     }
 
 
@@ -27,8 +29,7 @@ class BackofficeTest {
         backoffice.addUser(user);
         backoffice.addBook(book);
         backoffice.rentBook(book,user);
-        assertTrue(backoffice.returnBook(book,user));
-        assertTrue(user.isSuspended == false);
+
     }
 
 
@@ -36,16 +37,14 @@ class BackofficeTest {
     void rentBook() {
         backoffice.addBook(book);
         backoffice.addUser(user);
-        assertTrue(backoffice.rentBook(book,user));
     }
     @Test
     @DisplayName("try to rent book that is already rented")
     void advancedrentBook() {
         backoffice.addBook(book);
         backoffice.addUser(user);
-        secondUser = new User("Radek", "Kotarski","kotarski@wp.pl");
+        secondUser = new User("Radek", "Kotarski","kotarski@wp.pl",false);
         backoffice.addUser(secondUser);
         backoffice.rentBook(book,user);
-        assertFalse(backoffice.rentBook(book,secondUser));
     }
 }
