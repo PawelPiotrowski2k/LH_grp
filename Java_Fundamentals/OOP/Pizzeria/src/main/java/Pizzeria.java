@@ -1,8 +1,9 @@
+import java.util.List;
+
 public class Pizzeria {
-    private int freeTables;
+    List<Order> ordersInQueue;
 
-
-    public void placeCustomer(){
-
+    public void createOrder(List<Pizza> listOfPizzas, CustomerType customerType, boolean takeAway){
+        Order order = new Order(listOfPizzas,customerType,takeAway);
     }
 }
