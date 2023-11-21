@@ -1,3 +1,5 @@
+package Models;
+
 public class Ingredients {
     private final int minQuantity;
     private final String name;
@@ -11,6 +13,9 @@ public class Ingredients {
     }
     public void orderIngredients(int value){
         quantityInStock += value;
+    }
+    public void useIngredients(int ammount){
+        this.quantityInStock = quantityInStock- ammount;
     }
 
 

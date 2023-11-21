@@ -1,3 +1,5 @@
+package Models;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -16,30 +18,33 @@ public class Order {
         this.takeAway = takeAway;
     }
 
-    public double getFinalPrcie() {
-        calculateFinalPrice();
-        return finalPrcie;
+
+    public String getOrderId() {
+        return orderId;
     }
 
-    private void calculateFinalPrice() {
+    private double getFinalPrcie() {
+        double pricewithdiscount = 0;
+        double childDiscount = 0.9;
+        double studentDiscount = 0.6;
         for (Pizza pizaa :
                 listOfPizzas) {
-            this.finalPrcie += pizaa.getPrice();
+            pricewithdiscount += pizaa.getPrice();
         }
         switch (LocalDateTime.MAX.getDayOfWeek()) {
             case TUESDAY:
                 if (customerType.equals(CustomerType.CHILD)) {
-                    finalPrcie = finalPrcie * 0.9;
+                    pricewithdiscount = finalPrcie * childDiscount;
                 }
                 break;
             case THURSDAY:
                 if (customerType.equals(CustomerType.STUDENT)) {
-                    finalPrcie = finalPrcie * 0.6;
+                    pricewithdiscount = finalPrcie * studentDiscount;
                 }
+                break;
             default:
                 break;
         }
+        return pricewithdiscount;
     }
-
-
 }
