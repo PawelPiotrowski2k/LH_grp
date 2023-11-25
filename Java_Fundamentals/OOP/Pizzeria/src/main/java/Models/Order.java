@@ -23,6 +23,10 @@ public class Order {
         return orderId;
     }
 
+    public List<Pizza> getListOfPizzas() {
+        return listOfPizzas;
+    }
+
     private double getFinalPrcie() {
         double pricewithdiscount = 0;
         double childDiscount = 0.9;

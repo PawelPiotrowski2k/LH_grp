@@ -17,4 +17,8 @@ public class Pizza {
     public int getPrice() {
         return price;
     }
+
+    public Map<Ingredients, Integer> getIngredientsNeeded() {
+        return ingredientsNeeded;
+    }
 }

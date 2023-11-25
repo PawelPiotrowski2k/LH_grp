@@ -1,4 +1,6 @@
 import Models.Cook;
+import Models.Ingredients;
+import Models.IngredientsMonitor;
 import Models.Order;
 
 import java.util.*;
@@ -7,11 +9,13 @@ public class OrderProcedure {
         private final Queue<Order> orderQueue;
         private final Set<Cook> listOfFreeCooks;
         private final Map<Cook,String> listOfCookWithOrder;
+        private final IngredientsMonitor ingredientsMonitor;
 
-    public OrderProcedure(Queue<Order> orderQueue, Set<Cook> listOfCooks, Map<Cook, String> listOfCookWithOrder) {
+    public OrderProcedure(Queue<Order> orderQueue, Set<Cook> listOfCooks, Map<Cook, String> listOfCookWithOrder,IngredientsMonitor ingredientsMonitor) {
         this.orderQueue = orderQueue;
         this.listOfFreeCooks = listOfCooks;
         this.listOfCookWithOrder = listOfCookWithOrder;
+        this.ingredientsMonitor = ingredientsMonitor;
     }
 
     public void addOrder(Order order){
@@ -19,6 +23,7 @@ public class OrderProcedure {
             orderQueue.add(order);
         }else {
             assignCooksToOrders();
+
         }
     }
     private void assignCooksToOrders() {
