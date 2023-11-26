@@ -6,9 +6,9 @@ import java.util.Map;
 public class Pizza {
     private final int price;
     private final String name;
-    private final Map<Ingredients,Integer> ingredientsNeeded;
+    private final Map<String,Integer> ingredientsNeeded;
 
-    public Pizza(int price, String name, Map<Ingredients, Integer> ingredientsNeeded) {
+    public Pizza(int price, String name, Map<String, Integer> ingredientsNeeded) {
         this.price = price;
         this.name = name;
         this.ingredientsNeeded = ingredientsNeeded;
@@ -18,7 +18,7 @@ public class Pizza {
         return price;
     }
 
-    public Map<Ingredients, Integer> getIngredientsNeeded() {
+    public Map<String, Integer> getIngredientsNeeded() {
         return ingredientsNeeded;
     }
 }

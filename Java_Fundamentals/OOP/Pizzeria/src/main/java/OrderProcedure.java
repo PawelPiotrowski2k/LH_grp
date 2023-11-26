@@ -33,8 +33,8 @@ public class OrderProcedure {
                 removeCookFromFreeCookList(cook);
                 cook.prepareFood();
                 addFreeCook(cook);
-            } else {
-                continue;
+            }else {
+                break;
             }
         }
     }

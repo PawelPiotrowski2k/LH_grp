@@ -27,11 +27,12 @@ public class Pizzeria {
 
     public void createOrder(List<Pizza> listOfPizzas, CustomerType customerType, boolean takeAway, Customer customer) {
         Order order = new Order(listOfPizzas, customerType, takeAway);
-        if (!takeAway && !tableManager.assignCustomerToTable()) {
-            System.out.println("no more free tables, the order has been canceled");
+        if (!takeAway && !tableManager.assignCustomerToTable() && ingredientsMonitor.checkIfThereIsEnoughIngredients(order,setOfIngredients)) {
+            System.out.println("the order has been canceled");
         } else {
             listOfOrders.add(order);
             orderProcedure.addOrder(order);
+            ingredientsMonitor.subIngredientUsedInOrder(order,setOfIngredients);
             customer.eating();
             tableManager.cleanTable();
             ingredientsMonitor.checkIngredients(setOfIngredients);
@@ -54,7 +55,7 @@ public class Pizzeria {
         setOfCustomers.add(customer);
     }
 
-    public void createPizza(int price, String name, Map<Ingredients, Integer> ingredientsNeeded) {
+    public void createPizza(int price, String name, Map<String , Integer> ingredientsNeeded) {
         Pizza pizza = new Pizza(price, name, ingredientsNeeded);
         setOfPizzas.add(pizza);
     }

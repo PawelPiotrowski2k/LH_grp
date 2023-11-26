@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a91085fb-19a0-41cd-9785-1ef5c6f74357" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Ingredients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Ingredients.java" afterDir="false" />
+    <list default="true" id="118bf246-cb3d-4ad2-843f-9dcdc54ce014" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" afterDir="false" />
@@ -20,31 +20,56 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectId" id="2YYI5ijTloUkYpcEfgxzUFUBGJS" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Yg72v1sqTvaFJxsX5tfUwoMKXE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "C:/Users/pawel/OneDrive/Pulpit/lhgroup/LH_grp/Java_Fundamentals/OOP/Pizzeria"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a91085fb-19a0-41cd-9785-1ef5c6f74357" name="Changes" comment="" />
-      <created>1700695906850</created>
+      <changelist id="118bf246-cb3d-4ad2-843f-9dcdc54ce014" name="Changes" comment="" />
+      <created>1700935169357</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1700695906850</updated>
+      <updated>1700935169357</updated>
     </task>
     <servers />
   </component>
@@ -58,6 +83,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

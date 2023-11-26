@@ -28,27 +28,27 @@ public class Order {
     }
 
     private double getFinalPrcie() {
-        double pricewithdiscount = 0;
+        double priceWithDiscount = 0;
         double childDiscount = 0.9;
         double studentDiscount = 0.6;
         for (Pizza pizaa :
                 listOfPizzas) {
-            pricewithdiscount += pizaa.getPrice();
+            priceWithDiscount += pizaa.getPrice();
         }
         switch (LocalDateTime.MAX.getDayOfWeek()) {
             case TUESDAY:
                 if (customerType.equals(CustomerType.CHILD)) {
-                    pricewithdiscount = finalPrcie * childDiscount;
+                    priceWithDiscount = finalPrcie * childDiscount;
                 }
                 break;
             case THURSDAY:
                 if (customerType.equals(CustomerType.STUDENT)) {
-                    pricewithdiscount = finalPrcie * studentDiscount;
+                    priceWithDiscount = finalPrcie * studentDiscount;
                 }
                 break;
             default:
                 break;
         }
-        return pricewithdiscount;
+        return priceWithDiscount;
     }
 }
