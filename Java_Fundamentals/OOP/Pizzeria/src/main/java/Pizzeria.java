@@ -25,8 +25,8 @@ public class Pizzeria {
         this.ingredientsMonitor = ingredientsMonitor;
     }
 
-    public void createOrder(List<Pizza> listOfPizzas, CustomerType customerType, boolean takeAway, Customer customer) {
-        Order order = new Order(listOfPizzas, customerType, takeAway);
+    public void createOrder(List<Pizza> listOfPizzas, boolean takeAway, Customer customer) {
+        Order order = new Order(listOfPizzas, takeAway,customer);
         if (!takeAway && !tableManager.assignCustomerToTable() && ingredientsMonitor.checkIfThereIsEnoughIngredients(order,setOfIngredients)) {
             System.out.println("the order has been canceled");
         } else {
@@ -45,8 +45,7 @@ public class Pizzeria {
         orderProcedure.addFreeCook(cook);
     }
 
-    public void addIngredient(int minQuantity, String name, int quantityInStock) {
-        Ingredients ingredient = new Ingredients(minQuantity, name, quantityInStock);
+    public void addIngredient(Ingredients ingredient) {
         setOfIngredients.add(ingredient);
     }
 
@@ -55,8 +54,7 @@ public class Pizzeria {
         setOfCustomers.add(customer);
     }
 
-    public void createPizza(int price, String name, Map<String , Integer> ingredientsNeeded) {
-        Pizza pizza = new Pizza(price, name, ingredientsNeeded);
+    public void createPizza(Pizza pizza) {
         setOfPizzas.add(pizza);
     }
 

@@ -11,10 +11,10 @@ public class Order {
     private final boolean takeAway;
     private double finalPrcie;
 
-    public Order(List<Pizza> listOfPizzas, CustomerType customerType, boolean takeAway) {
+    public Order(List<Pizza> listOfPizzas, boolean takeAway,Customer customer) {
         this.orderId = UUID.randomUUID().toString();
         this.listOfPizzas = listOfPizzas;
-        this.customerType = customerType;
+        this.customerType = customer.getCustomerType();
         this.takeAway = takeAway;
     }
 

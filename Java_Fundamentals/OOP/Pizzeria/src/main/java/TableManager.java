@@ -2,9 +2,9 @@ public class TableManager {
     private final int numerOfTables;
     private int freeTables;
 
-    public TableManager(int numerOfTables, int freeTables) {
+    public TableManager(int numerOfTables) {
         this.numerOfTables = numerOfTables;
-        this.freeTables = freeTables;
+        this.freeTables = numerOfTables;
     }
 
 

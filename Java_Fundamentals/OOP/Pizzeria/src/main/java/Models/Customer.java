@@ -13,6 +13,10 @@ public class Customer {
         this.id = UUID.randomUUID().toString();
     }
     public void eating(){
-        System.out.println("nom nom");
+        System.out.println(name + " nom nom");
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
     }
 }
