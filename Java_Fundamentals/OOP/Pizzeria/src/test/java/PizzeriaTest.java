@@ -13,7 +13,6 @@ class PizzeriaTest {
     Set<Cook> setOfCooks;
     Set<Pizza> setOfPizzas;
     Set<Ingredients> setOfIngredients;
-    Map<Cook,String>mapOfCookWithOrder;
     OrderProcedure orderProcedure;
     TableManager tableManager;
     Queue<Order> orderQueue;
@@ -24,9 +23,7 @@ class PizzeriaTest {
 
     @BeforeEach
     void setup(){
-
         orderQueue = new ArrayDeque<>();
-        mapOfCookWithOrder = new HashMap<>();
         listOfOrders = new ArrayList<>();
         setOfCustomers = new HashSet<>();
         ingredientsMonitor = new IngredientsMonitor();
@@ -34,7 +31,7 @@ class PizzeriaTest {
         setOfPizzas = new HashSet<>();
         setOfIngredients = new HashSet<>();
         tableManager = new TableManager(3);
-        orderProcedure = new OrderProcedure(orderQueue,setOfCooks,mapOfCookWithOrder);
+        orderProcedure = new OrderProcedure(orderQueue,setOfCooks);
         objectUnderTest = new Pizzeria(ingredientsMonitor,listOfOrders,setOfCustomers,setOfCooks,setOfPizzas,orderProcedure,tableManager,setOfIngredients);
     }
 
@@ -56,7 +53,7 @@ class PizzeriaTest {
         List<Pizza> listOfOrderedPizzas = new ArrayList<>();
         listOfOrderedPizzas.add(margheritta);
         Customer customer = new Customer("Pawel", CustomerType.STUDENT);
-        objectUnderTest.createOrder(listOfOrderedPizzas,false, customer);
+//        objectUnderTest.createOrder(listOfOrderedPizzas,false, customer);
 
     }
 

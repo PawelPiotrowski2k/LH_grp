@@ -25,8 +25,8 @@ public class Pizzeria {
         this.ingredientsMonitor = ingredientsMonitor;
     }
 
-    public void createOrder(List<Pizza> listOfPizzas, boolean takeAway, Customer customer) {
-        Order order = new Order(listOfPizzas, takeAway,customer);
+    public void createOrder(Map<Pizza, Integer> listOfPizzasWithQuantity, boolean takeAway, Customer customer) {
+        Order order = new Order(listOfPizzasWithQuantity, takeAway,customer);
         if (!takeAway && !tableManager.assignCustomerToTable() && ingredientsMonitor.checkIfThereIsEnoughIngredients(order,setOfIngredients)) {
             System.out.println("the order has been canceled");
         } else {

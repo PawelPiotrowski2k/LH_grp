@@ -2,20 +2,22 @@ package Models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Order {
     private final String orderId;
-    private final List<Pizza> listOfPizzas;
+    private final Map<Pizza, Integer> listOfPizzasWithQuantity;
     private final CustomerType customerType;
     private final boolean takeAway;
     private double finalPrcie;
 
-    public Order(List<Pizza> listOfPizzas, boolean takeAway,Customer customer) {
+    public Order(Map<Pizza, Integer> listOfPizzasWithQuantity, boolean takeAway,Customer customer) {
         this.orderId = UUID.randomUUID().toString();
-        this.listOfPizzas = listOfPizzas;
+        this.listOfPizzasWithQuantity = listOfPizzasWithQuantity;
         this.customerType = customer.getCustomerType();
         this.takeAway = takeAway;
+        this.finalPrcie = getFinalPrcie();
     }
 
 
@@ -23,17 +25,19 @@ public class Order {
         return orderId;
     }
 
-    public List<Pizza> getListOfPizzas() {
-        return listOfPizzas;
+    public Map<Pizza, Integer> getListOfPizzasWithQuantity() {
+        return listOfPizzasWithQuantity;
     }
 
     private double getFinalPrcie() {
         double priceWithDiscount = 0;
         double childDiscount = 0.9;
         double studentDiscount = 0.6;
-        for (Pizza pizaa :
-                listOfPizzas) {
-            priceWithDiscount += pizaa.getPrice();
+        for (Map.Entry<Pizza, Integer> entry :listOfPizzasWithQuantity.entrySet()
+             ) {
+            Pizza pizza = entry.getKey();
+            Integer quantity = entry.getValue();
+            priceWithDiscount = pizza.getPrice() * quantity + priceWithDiscount;
         }
         switch (LocalDateTime.MAX.getDayOfWeek()) {
             case TUESDAY:
