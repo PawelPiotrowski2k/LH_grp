@@ -12,9 +12,6 @@ public class Customer {
         this.customerType = customerType;
         this.id = UUID.randomUUID().toString();
     }
-    public void eating(){
-        System.out.println(name + " nom nom");
-    }
 
     public CustomerType getCustomerType() {
         return customerType;

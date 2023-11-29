@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5582400f-52d2-4e6d-91e6-67a2ca7a7cd6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../.gitignore/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gitignore/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.gitignore/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gitignore/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.gitignore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gitignore/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="de705500-c8c6-420d-a1ac-9ca88bad0772" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pizzeria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pizzeria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" beforeDir="false" />
+    </list>
+    <list id="180b4467-b995-49e0-8a41-ee4bdcac8030" name="Changes by sebastian" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectId" id="2Yka0lJZhJyoqBGdjpOKuI5Sh2W" />
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/OrderProcedure.java">
+      <ranges>
+        <range start1="0" end1="2" start2="0" end2="1" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="7" end1="8" start2="6" end2="10" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="9" end1="11" start2="11" end2="12" changelist="180b4467-b995-49e0-8a41-ee4bdcac8030" />
+        <range start1="12" end1="13" start2="13" end2="16" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="16" end1="17" start2="19" end2="20" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="23" end1="23" start2="26" end2="44" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="24" end1="25" start2="45" end2="46" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="28" end1="29" start2="49" end2="50" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="34" end1="36" start2="55" end2="57" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+        <range start1="38" end1="39" start2="59" end2="60" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
+      </ranges>
+    </file>
+  </component>
+  <component name="ProjectId" id="2YoBFmYINM0yphVkl5wG37N4V6W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,12 +54,24 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5582400f-52d2-4e6d-91e6-67a2ca7a7cd6" name="Changes" comment="" />
-      <created>1701071812645</created>
+      <changelist id="de705500-c8c6-420d-a1ac-9ca88bad0772" name="Changes" comment="" />
+      <created>1701181953371</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1701071812645</updated>
+      <updated>1701181953371</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

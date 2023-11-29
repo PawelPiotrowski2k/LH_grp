@@ -1,41 +1,62 @@
-import Models.Cook;
-import Models.Order;
+import Models.*;
 
 import java.util.*;
 
 public class OrderProcedure {
         private final Queue<Order> orderQueue;
-        private final Set<Cook> listOfFreeCooks;
+        private final Set<Cook> setOfCooks;
+        private final TableManager tableManager;
+        private final IngredientsMonitor ingredientsMonitor;
 
 
-    public OrderProcedure(Queue<Order> orderQueue, Set<Cook> listOfCooks) {
+    public OrderProcedure(Queue<Order> orderQueue, Set<Cook> setOfCooks, TableManager tableManager, IngredientsMonitor ingredientsMonitor) {
         this.orderQueue = orderQueue;
-        this.listOfFreeCooks = listOfCooks;
+        this.setOfCooks = setOfCooks;
+        this.tableManager = tableManager;
+        this.ingredientsMonitor = ingredientsMonitor;
     }
 
     public void addOrder(Order order){
-        if(listOfFreeCooks.isEmpty()){
+        if(setOfCooks.isEmpty()){
             orderQueue.add(order);
         }else {
             assignCooksToOrders();
 
         }
     }
+
+    public void createOrder(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway, Customer customer) {
+        if (!takeAway && !tableManager.assignCustomerToTable() && ingredientsMonitor.checkIfThereIsEnoughIngredients(mapOfPizzasWithQuantity)) {
+            System.out.println("the order has been canceled");
+            return;
+        }
+        Order order = new Order(mapOfPizzasWithQuantity, takeAway, customer);
+        addOrder(order);
+        ingredientsMonitor.subIngredientUsedInOrder(order.getMapOfPizzasWithQuantity());
+        tableManager.cleanTable();
+        ingredientsMonitor.checkIngredients();
+    }
+    public void procedOrder(Order order){
+        ingredientsMonitor.subIngredientUsedInOrder(order.getMapOfPizzasWithQuantity());
+        tableManager.cleanTable();
+        ingredientsMonitor.checkIngredients();
+    }
+
     private void assignCooksToOrders() {
-        for (Cook cook : listOfFreeCooks) {
+        for (Cook cook : setOfCooks) {
             if (!orderQueue.isEmpty()) {
                 removeCookFromFreeCookList(cook);
                 cook.prepareFood();
-                addFreeCook(cook);
+                addCook(cook);
             }else {
                 break;
             }
         }
     }
-    public void addFreeCook(Cook cook){
-        listOfFreeCooks.add(cook);
+    public void addCook(Cook cook){
+        setOfCooks.add(cook);
     }
     public void removeCookFromFreeCookList(Cook cook){
-        listOfFreeCooks.remove(cook);
+        setOfCooks.remove(cook);
     }
 }
