@@ -1,3 +1,5 @@
+package tableManaging;
+
 public class TableManager {
     private final int numerOfTables;
     private int freeTables;

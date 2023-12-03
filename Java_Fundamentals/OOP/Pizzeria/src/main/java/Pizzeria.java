@@ -1,15 +1,15 @@
 import Models.*;
+import Order.OrderProcedure;
+import ingredients.Ingredients;
+import ingredients.IngredientsMonitor;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class Pizzeria {
     private final Set<Customer> setOfCustomers;
     private final Set<Pizza> setOfPizzas;
-    //powyżej nie powinno być tutaj
     private final OrderProcedure orderProcedure;
-
     private final IngredientsMonitor ingredientsMonitor;
 
     public Pizzeria(IngredientsMonitor ingredientsMonitor, Set<Customer> setOfCustomer, Set<Pizza> setOfPizzas, OrderProcedure orderProcedure) {
@@ -26,21 +26,27 @@ public class Pizzeria {
         ingredientsMonitor.checkIngredients();
     }
 
-    public void addCook(String name) {
-        Cook cook = new Cook(name);
+    public void addCook(Cook cook) {
         orderProcedure.addCook(cook);
     }
 
     public void addIngredient(Ingredients ingredient) {
         ingredientsMonitor.addIngredient(ingredient);
     }
+    //czy robić tak
 
-    public void addCustomer(String name, CustomerType customerType) {
-        Customer customer = new Customer(name, customerType);
+    //public void addIngredient(int minQuantity, String name, int quantityInStock) {
+    // Ingredients ingredient = new Ingredients(minQuantity, name, quantityInStock);
+    //        ingredientsMonitor.addIngredient(ingredient);
+    //    }
+
+
+
+    public void addCustomer(Customer customer) {
         setOfCustomers.add(customer);
     }
 
-    public void createPizza(Pizza pizza) {
+    public void addPizza(Pizza pizza) {
         setOfPizzas.add(pizza);
     }
 

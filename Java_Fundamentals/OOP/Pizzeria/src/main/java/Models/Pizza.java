@@ -1,6 +1,7 @@
 package Models;
 
-import java.util.List;
+import ingredients.Ingredients;
+
 import java.util.Map;
 
 public class Pizza {

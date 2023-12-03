@@ -1,4 +1,6 @@
-package Models;
+package ingredients;
+
+import Models.Pizza;
 
 import java.util.*;
 

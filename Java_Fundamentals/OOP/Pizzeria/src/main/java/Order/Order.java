@@ -1,4 +1,8 @@
-package Models;
+package Order;
+
+import Models.Customer;
+import Models.CustomerType;
+import Models.Pizza;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -12,7 +16,7 @@ public class Order {
     private final boolean takeAway;
     private double finalPrcie;
 
-    public Order(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway,Customer customer) {
+    public Order(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway, Customer customer) {
         this.orderId = UUID.randomUUID().toString();
         this.mapOfPizzasWithQuantity = mapOfPizzasWithQuantity;
         this.customerType = customer.getCustomerType();

@@ -1,4 +1,4 @@
-package Models;
+package ingredients;
 
 import java.util.UUID;
 
