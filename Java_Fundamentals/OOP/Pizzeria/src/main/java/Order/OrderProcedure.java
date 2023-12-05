@@ -20,17 +20,21 @@ public class OrderProcedure {
         this.ingredientsMonitor = ingredientsMonitor;
     }
 
+    /**
+     * x.addOrder (Set<Order> orders -> orders.add(order))
+     * checkIfAnyOrderToPrepare
+     * @param order
+     */
     public void addOrder(Order order){
         if(setOfCooks.isEmpty()){
             orderQueue.add(order);
         }else {
             assignCooksToOrders();
-
         }
     }
 
     public void createOrder(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway, Customer customer) {
-        if (!takeAway && !tableManager.assignCustomerToTable() && ingredientsMonitor.checkIfThereIsEnoughIngredients(mapOfPizzasWithQuantity)) {
+        if (!takeAway && !tableManager.assignCustomerToTable() && !ingredientsMonitor.checkIfThereIsEnoughIngredients(mapOfPizzasWithQuantity)) {
             System.out.println("the order has been canceled");
             return;
         }
@@ -40,12 +44,21 @@ public class OrderProcedure {
         tableManager.cleanTable();
         ingredientsMonitor.checkIngredients();
     }
+
     public void procedOrder(Order order){
         ingredientsMonitor.subIngredientUsedInOrder(order.getMapOfPizzasWithQuantity());
         tableManager.cleanTable();
         ingredientsMonitor.checkIngredients();
     }
 
+    
+    //poniżej powinno być w czymś osobnym
+    public void addCook(Cook cook){
+        setOfCooks.add(cook);
+    }
+    public void removeCookFromFreeCookList(Cook cook){
+        setOfCooks.remove(cook);
+    }
     private void assignCooksToOrders() {
         for (Cook cook : setOfCooks) {
             if (!orderQueue.isEmpty()) {
@@ -56,11 +69,5 @@ public class OrderProcedure {
                 break;
             }
         }
-    }
-    public void addCook(Cook cook){
-        setOfCooks.add(cook);
-    }
-    public void removeCookFromFreeCookList(Cook cook){
-        setOfCooks.remove(cook);
     }
 }

@@ -7,7 +7,7 @@ import java.util.*;
 public class IngredientsMonitor {
     private final Set<Ingredients> setOfIngredients;
 
-    public IngredientsMonitor(Set<Ingredients> setOfIngredients) {
+    public IngredientsMonitor(final Set<Ingredients> setOfIngredients) {
         this.setOfIngredients = setOfIngredients;
     }
 
@@ -19,7 +19,7 @@ public class IngredientsMonitor {
         for (Ingredients ingredient :
                 setOfIngredients) {
             if (ingredient.getMinQuantity() > ingredient.getQuantityInStock()) {
-                int numberOfIngredientToOrder = ingredient.getMinQuantity() - ingredient.getQuantityInStock() + 100;
+                int numberOfIngredientToOrder = ingredient.getMinQuantity() - ingredient.getQuantityInStock() + 100;//magic number
                 ingredient.orderIngredients(numberOfIngredientToOrder);
             }
         }
@@ -27,18 +27,22 @@ public class IngredientsMonitor {
 
     public void subIngredientUsedInOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
         Map<Ingredients, Integer> mapOfUsedIngredients = new HashMap<>(mapIngredientsUsageFromOrder(mapOfPizzaWithQuantity));
-        List<Ingredients> listOfIngredients = new ArrayList<>(setOfIngredients);
         for (Map.Entry<Ingredients, Integer> ingredientEntry :
                 mapOfUsedIngredients.entrySet()) {
             Ingredients ingredient = ingredientEntry.getKey();
             Integer value = ingredientEntry.getValue();
+
             ingredient.useIngredients(value);
         }
     }
 
+    /**
+     * @FunctionalInteface
+     * x(Map<Pizza, Integer> mapOfPizzaWithQuantity, Callback<Void> callback)
+     */
+
     public boolean checkIfThereIsEnoughIngredients(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
         Map<Ingredients, Integer> mapOfUsedIngredients = new HashMap<>(mapIngredientsUsageFromOrder(mapOfPizzaWithQuantity));
-        List<Ingredients> listOfIngredients = new ArrayList<>(setOfIngredients);
         for (Map.Entry<Ingredients, Integer> ingredientEntry :
                 mapOfUsedIngredients.entrySet()) {
             Ingredients ingredient = ingredientEntry.getKey();
@@ -52,6 +56,7 @@ public class IngredientsMonitor {
 
     private Map<Ingredients, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
         Map<Ingredients, Integer> resultMap = new HashMap<>();
+        //zobaczyć czy w tym forze powinien być for
         for (Map.Entry<Pizza, Integer> listOfPizzasEntry : mapOfPizzaWithQuantity.entrySet()) {
             Map<Ingredients, Integer> pizzaIngredients = new HashMap<>(listOfPizzasEntry.getKey().getIngredientsNeeded());
             for (Map.Entry<Ingredients, Integer> ingredientEntry : pizzaIngredients.entrySet()) {

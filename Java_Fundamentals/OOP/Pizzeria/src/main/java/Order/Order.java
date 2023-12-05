@@ -37,12 +37,14 @@ public class Order {
         double priceWithDiscount = 0;
         double childDiscount = 0.9;
         double studentDiscount = 0.6;
+        //w enumie te wartości
         for (Map.Entry<Pizza, Integer> entry : mapOfPizzasWithQuantity.entrySet()
              ) {
             Pizza pizza = entry.getKey();
             Integer quantity = entry.getValue();
             priceWithDiscount = pizza.getPrice() * quantity + priceWithDiscount;
         }
+        //Order nie powinien naliczać zniżek
         switch (customerType) {
             case CHILD:
                 if (LocalDateTime.now().getDayOfWeek().equals(DayOfWeek.TUESDAY)) {

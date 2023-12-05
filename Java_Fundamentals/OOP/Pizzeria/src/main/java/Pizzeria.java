@@ -6,6 +6,18 @@ import ingredients.IngredientsMonitor;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Order:
+ *  OrderService
+ *  OrderRepo
+ *  ....
+ * Table:
+ *    TableDto/TableModel
+ *    TableService
+ *    .....
+ *
+ *
+ */
 public class Pizzeria {
     private final Set<Customer> setOfCustomers;
     private final Set<Pizza> setOfPizzas;
@@ -33,14 +45,6 @@ public class Pizzeria {
     public void addIngredient(Ingredients ingredient) {
         ingredientsMonitor.addIngredient(ingredient);
     }
-    //czy robić tak
-
-    //public void addIngredient(int minQuantity, String name, int quantityInStock) {
-    // Ingredients ingredient = new Ingredients(minQuantity, name, quantityInStock);
-    //        ingredientsMonitor.addIngredient(ingredient);
-    //    }
-
-
 
     public void addCustomer(Customer customer) {
         setOfCustomers.add(customer);
@@ -49,5 +53,4 @@ public class Pizzeria {
     public void addPizza(Pizza pizza) {
         setOfPizzas.add(pizza);
     }
-
 }

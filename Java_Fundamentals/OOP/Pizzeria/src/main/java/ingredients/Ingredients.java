@@ -1,9 +1,9 @@
 package ingredients;
 
 import java.util.UUID;
-
-public class Ingredients {
-    private final int minQuantity;
+//Ingredient!
+public class Ingredients  {
+    private final int minQuantity; //powinno być w ingredientsMonitor
     private final String name;
     private int quantityInStock;
     private final String id;
@@ -19,7 +19,7 @@ public class Ingredients {
         quantityInStock += value;
     }
     public void useIngredients(int ammount){
-        this.quantityInStock = quantityInStock- ammount;
+        this.quantityInStock -= ammount;
     }
 
     public int getMinQuantity() {
