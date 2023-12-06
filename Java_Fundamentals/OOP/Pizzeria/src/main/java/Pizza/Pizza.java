@@ -1,15 +1,15 @@
-package Models;
+package Pizza;
 
-import ingredients.Ingredients;
+import ingredient.Ingredient;
 
 import java.util.Map;
 
 public class Pizza {
     private final double price;
     private final String name;
-    private final Map<Ingredients,Integer> ingredientsNeeded;
+    private final Map<Ingredient,Integer> ingredientsNeeded;
 
-    public Pizza(double price, String name, Map<Ingredients, Integer> ingredientsNeeded) {
+    public Pizza(double price, String name, Map<Ingredient, Integer> ingredientsNeeded) {
         this.price = price;
         this.name = name;
         this.ingredientsNeeded = ingredientsNeeded;
@@ -19,7 +19,7 @@ public class Pizza {
         return price;
     }
 
-    public Map<Ingredients, Integer> getIngredientsNeeded() {
+    public Map<Ingredient, Integer> getIngredientsNeeded() {
         return ingredientsNeeded;
     }
 }

@@ -1,4 +1,4 @@
-package tableManaging;
+package Table;
 
 public class TableManager {
     private final int numerOfTables;

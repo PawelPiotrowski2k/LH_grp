@@ -1,34 +1,28 @@
-import Models.*;
+import Cook.Cook;
+import Customer.Customer;
+import Order.OrderPreparation;
+import Pizza.*;
 import Order.OrderProcedure;
-import ingredients.Ingredients;
-import ingredients.IngredientsMonitor;
+import ingredient.Ingredient;
+import ingredient.IngredientsMonitor;
 
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Order:
- *  OrderService
- *  OrderRepo
- *  ....
- * Table:
- *    TableDto/TableModel
- *    TableService
- *    .....
- *
- *
- */
+
 public class Pizzeria {
     private final Set<Customer> setOfCustomers;
     private final Set<Pizza> setOfPizzas;
     private final OrderProcedure orderProcedure;
     private final IngredientsMonitor ingredientsMonitor;
+    private final OrderPreparation orderPreparation;
 
-    public Pizzeria(IngredientsMonitor ingredientsMonitor, Set<Customer> setOfCustomer, Set<Pizza> setOfPizzas, OrderProcedure orderProcedure) {
+    public Pizzeria(IngredientsMonitor ingredientsMonitor,OrderPreparation orderPreparation, Set<Customer> setOfCustomer, Set<Pizza> setOfPizzas, OrderProcedure orderProcedure) {
         this.setOfCustomers = setOfCustomer;
         this.setOfPizzas = setOfPizzas;
         this.orderProcedure = orderProcedure;
         this.ingredientsMonitor = ingredientsMonitor;
+        this.orderPreparation = orderPreparation;
     }
 
     public void createOrder(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway, Customer customer) {
@@ -39,10 +33,10 @@ public class Pizzeria {
     }
 
     public void addCook(Cook cook) {
-        orderProcedure.addCook(cook);
+        orderPreparation.addCook(cook);
     }
 
-    public void addIngredient(Ingredients ingredient) {
+    public void addIngredient(Ingredient ingredient) {
         ingredientsMonitor.addIngredient(ingredient);
     }
 
