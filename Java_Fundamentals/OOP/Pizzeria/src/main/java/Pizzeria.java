@@ -36,8 +36,8 @@ public class Pizzeria {
         orderPreparation.addCook(cook);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredientsMonitor.addIngredient(ingredient);
+    public void addIngredient(Ingredient ingredient, int minQuantity) {
+        ingredientsMonitor.addIngredient(ingredient, minQuantity);
     }
 
     public void addCustomer(Customer customer) {

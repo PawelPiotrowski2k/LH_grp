@@ -32,7 +32,7 @@ public class OrderProcedure {
         procedOrder(order);
     }
 
-    public void procedOrder(Order order){
+    private void procedOrder(Order order){
         ingredientsMonitor.subIngredientUsedInOrder(order.getMapOfPizzasWithQuantity());
         tableManager.cleanTable();
         ingredientsMonitor.checkIngredients();

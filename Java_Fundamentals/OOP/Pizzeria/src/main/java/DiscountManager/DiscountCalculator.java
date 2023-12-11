@@ -12,7 +12,7 @@ public class DiscountCalculator {
     private   DiscountCalculator() {
     }
 
-    public static double getFinalPrcieFromOrderWithDiscount(Customer customer, Map<Pizza, Integer> MapOfPizzasWithQuantity) {
+    public static double getFinalPrcieWithDiscountFromOrder(Customer customer, Map<Pizza, Integer> MapOfPizzasWithQuantity) {
         double priceWithDiscount = 0;
         for (Map.Entry<Pizza, Integer> entry : MapOfPizzasWithQuantity.entrySet()
         ) {

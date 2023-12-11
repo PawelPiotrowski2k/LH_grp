@@ -3,6 +3,7 @@ package ingredient;
 import Pizza.Pizza;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class IngredientsMonitor {
     private final Set<Ingredient> setOfIngredients;
@@ -13,8 +14,10 @@ public class IngredientsMonitor {
         this.mapOfMinQuantityOfIngredients = mapOfMinQuantityOfIngredients;
     }
 
-    public void addIngredient(Ingredient ingredients) {
-        setOfIngredients.add(ingredients);
+    public void addIngredient(Ingredient ingredients, int minQuantity) {
+        if(setOfIngredients.add(ingredients)) {
+            mapOfMinQuantityOfIngredients.put(ingredients, minQuantity);
+        }
     }
 
     public void checkIngredients() {
@@ -56,19 +59,34 @@ public class IngredientsMonitor {
         return true;
     }
 
-    private Map<Ingredient, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
-        Map<Ingredient, Integer> resultMap = new HashMap<>();
-        //zobaczyć czy w tym forze powinien być for
-        for (Map.Entry<Pizza, Integer> listOfPizzasEntry : mapOfPizzaWithQuantity.entrySet()) {
-            Map<Ingredient, Integer> pizzaIngredients = new HashMap<>(listOfPizzasEntry.getKey().getIngredientsNeeded());
-            for (Map.Entry<Ingredient, Integer> ingredientEntry : pizzaIngredients.entrySet()) {
-                Ingredient ingredient = ingredientEntry.getKey();
-                int quantity = ingredientEntry.getValue() * listOfPizzasEntry.getValue();
-                resultMap.merge(ingredient, quantity, Integer::sum);
-            }
-        }
-        return resultMap;
-    }
+//    private Map<Ingredient, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
+//        Map<Ingredient, Integer> resultMap = new HashMap<>();
+//        //zobaczyć czy w tym forze powinien być for
+//        for (Map.Entry<Pizza, Integer> listOfPizzasEntry : mapOfPizzaWithQuantity.entrySet()) {
+//            Map<Ingredient, Integer> pizzaIngredients = new HashMap<>(listOfPizzasEntry.getKey().getIngredientsNeeded());
+//            for (Map.Entry<Ingredient, Integer> ingredientEntry : pizzaIngredients.entrySet()) {
+//                Ingredient ingredient = ingredientEntry.getKey();
+//                int quantity = ingredientEntry.getValue() * listOfPizzasEntry.getValue();
+//                resultMap.merge(ingredient, quantity, Integer::sum);
+//            }
+//        }
+//        return resultMap;
+//    }
+private Map<Ingredient, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
+    return mapOfPizzaWithQuantity.entrySet().stream()
+            .flatMap(entry -> {
+                Pizza pizza = entry.getKey();
+                int quantity = entry.getValue();
+                return pizza.getIngredientsNeeded().entrySet().stream()
+                        .map(ingredientEntry -> {
+                            Ingredient ingredient = ingredientEntry.getKey();
+                            int ingredientQuantity = ingredientEntry.getValue() * quantity;
+                            return new AbstractMap.SimpleEntry<>(ingredient, ingredientQuantity);
+                        });
+            })
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
+}
+
 
 
 }

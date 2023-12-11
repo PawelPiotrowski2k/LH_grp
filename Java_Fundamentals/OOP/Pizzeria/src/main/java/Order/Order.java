@@ -19,7 +19,7 @@ public class Order {
         this.mapOfPizzasWithQuantity = mapOfPizzasWithQuantity;
         this.takeAway = takeAway;
         this.customer = customer;
-        this.finalPrcie = DiscountCalculator.getFinalPrcieFromOrderWithDiscount(customer,mapOfPizzasWithQuantity);
+        this.finalPrcie = DiscountCalculator.getFinalPrcieWithDiscountFromOrder(customer,mapOfPizzasWithQuantity);
     }
 
     public String getOrderId() {

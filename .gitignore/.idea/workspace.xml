@@ -4,74 +4,87 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de705500-c8c6-420d-a1ac-9ca88bad0772" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/IngredientsMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Pizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" afterDir="false" />
+    <list default="true" id="4f84f908-275e-4abd-8f4b-9f4851144b4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DiscountManager/DiscountCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DiscountManager/DiscountCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Order/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pizzeria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pizzeria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" beforeDir="false" />
-    </list>
-    <list id="180b4467-b995-49e0-8a41-ee4bdcac8030" name="Changes by sebastian" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OrderProcedure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ingredient/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ingredient/IngredientsMonitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/OrderProcedure.java">
-      <ranges>
-        <range start1="0" end1="2" start2="0" end2="1" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="7" end1="8" start2="6" end2="10" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="9" end1="11" start2="11" end2="12" changelist="180b4467-b995-49e0-8a41-ee4bdcac8030" />
-        <range start1="12" end1="13" start2="13" end2="16" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="16" end1="17" start2="19" end2="20" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="23" end1="23" start2="26" end2="44" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="24" end1="25" start2="45" end2="46" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="28" end1="29" start2="49" end2="50" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="34" end1="36" start2="55" end2="57" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-        <range start1="38" end1="39" start2="59" end2="60" changelist="de705500-c8c6-420d-a1ac-9ca88bad0772" />
-      </ranges>
-    </file>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2ZOqNaQjMos5INn3s7cugDISohq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectId" id="2YoBFmYINM0yphVkl5wG37N4V6W" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Maven.Pizzeria [clean].executor": "Run",
+    "Maven.Pizzeria [test].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/LHgrp/LH_grp/Java_Fundamentals/OOP/Pizzeria",
+    "settings.editor.selected.configurable": "MavenSettings"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-8336523bb0d9-93b19daf" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="de705500-c8c6-420d-a1ac-9ca88bad0772" name="Changes" comment="" />
-      <created>1701181953371</created>
+      <changelist id="4f84f908-275e-4abd-8f4b-9f4851144b4d" name="Changes" comment="" />
+      <created>1702303434177</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1701181953371</updated>
+      <updated>1702303434177</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
