@@ -1,6 +1,7 @@
 package Pizza;
 
-import ingredient.Ingredient;
+import Ingredient.Ingredient;
+
 
 import java.util.Map;
 

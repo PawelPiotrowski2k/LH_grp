@@ -1,4 +1,4 @@
-package ingredient;
+package Ingredient;
 
 import java.util.UUID;
 public class Ingredient {
@@ -15,11 +15,11 @@ public class Ingredient {
     }
 
     public void orderIngredients(int value){
-        quantityInStock += value;
+        quantityInStock =  quantityInStock + value;
     }
 
     public void useIngredients(int ammount){
-        this.quantityInStock -= ammount;
+        this.quantityInStock = quantityInStock - ammount;
     }
 
     public int getQuantityInStock() {

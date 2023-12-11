@@ -1,24 +1,26 @@
 import Customer.Customer;
-
 import Order.Order;
 import Order.OrderPreparation;
 import Order.OrderProcedure;
 import Table.TableManager;
-import ingredient.Ingredient;
-import ingredient.IngredientsMonitor;
+import Ingredient.Ingredient;
+import Ingredient.IngredientsMonitor;
 import Pizza.Pizza;
 import Cook.Cook;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import Customer.CustomerType;
 
 import java.util.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PizzeriaTest {
     Pizzeria pizzeria;
     OrderProcedure orderProcedure;
     IngredientsMonitor ingredientsMonitor;
     OrderPreparation orderPreparation;
-
+    Customer customer;
     Set<Customer> setOfCustomer;
     Set<Pizza> setOfPizza;
     TableManager tableManager;
@@ -29,28 +31,58 @@ class PizzeriaTest {
     static int NUMBER_OF_TABLES = 20;
 
 
+
     @BeforeEach
     void setup (){
-        tableManager = new TableManager(NUMBER_OF_TABLES);
-        orderProcedure = new OrderProcedure(tableManager,ingredientsMonitor,orderPreparation);
-        ingredientsMonitor = new IngredientsMonitor(setOfIngredient,mapOfMinQuantityOfIngredient);
-        pizzeria = new Pizzeria(ingredientsMonitor,orderPreparation,setOfCustomer,setOfPizza,orderProcedure);
-        orderPreparation = new OrderPreparation(setOfCooks,queueOfOrders);
         setOfIngredient = new HashSet<>();
         mapOfMinQuantityOfIngredient = new HashMap<>();
         setOfCooks = new HashSet<>();
         setOfCustomer = new HashSet<>();
         setOfPizza = new HashSet<>();
         queueOfOrders = new LinkedList<>();
+        tableManager = new TableManager(NUMBER_OF_TABLES);
+        orderPreparation = new OrderPreparation(setOfCooks,queueOfOrders);
+        ingredientsMonitor = new IngredientsMonitor(setOfIngredient,mapOfMinQuantityOfIngredient);
+        orderProcedure = new OrderProcedure(tableManager,ingredientsMonitor,orderPreparation);
+        pizzeria = new Pizzeria(ingredientsMonitor,setOfCustomer,setOfPizza,orderProcedure);
+        customer = new Customer("Pawel", CustomerType.STUDENT);
+    }
+
+
+    @Test
+    @DisplayName("program orders ingredients properly")
+    void createOrder(){
+        Ingredient cheese = new Ingredient("cheese",60);
+        Ingredient salami = new Ingredient("salami",60);
+        Ingredient corn = new Ingredient("corn",60);
+        pizzeria.addIngredient(cheese,45);
+        pizzeria.addIngredient(salami,45);
+        pizzeria.addIngredient(corn,45);
+        Map<Ingredient,Integer> ingredientNeededToMargheritta = new HashMap<>();
+        ingredientNeededToMargheritta.put(cheese,5);
+        ingredientNeededToMargheritta.put(salami,10);
+        Pizza margherita = new Pizza(35,"margheritta", ingredientNeededToMargheritta);
+        pizzeria.addPizza(margherita);
+        Map<Pizza,Integer> mapOfOrderedPizzasWithQuantity = new HashMap<>();
+        mapOfOrderedPizzasWithQuantity.put(margherita,3);
+        pizzeria.createOrder(mapOfOrderedPizzasWithQuantity,false,customer);
+        assertEquals(130, salami.getQuantityInStock());
     }
     @Test
-    void createOrder(){
-
-        
-
-        pizzeria.createOrder();
+    @DisplayName("check if price is correct")
+    void createOrderAndCheckPrice(){
+        Ingredient cheese = new Ingredient("cheese",60);
+        Ingredient salami = new Ingredient("salami",60);
+        pizzeria.addIngredient(salami,45);
+        pizzeria.addIngredient(cheese,45);
+        Map<Ingredient,Integer> ingredientNeededToMargheritta = new HashMap<>();
+        ingredientNeededToMargheritta.put(cheese,5);
+        ingredientNeededToMargheritta.put(salami,10);
+        Pizza margherita = new Pizza(35,"margheritta", ingredientNeededToMargheritta);
+        pizzeria.addPizza(margherita);
+        Map<Pizza,Integer> mapOfOrderedPizzasWithQuantity = new HashMap<>();
+        mapOfOrderedPizzasWithQuantity.put(margherita,3);
+        Order order = new Order(mapOfOrderedPizzasWithQuantity,false,customer);
+        assertEquals(105,order.getFinalPrcie());
     }
-
-
-  
 }

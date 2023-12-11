@@ -1,9 +1,8 @@
 package Order;
 
-import Cook.Cook;
 import Customer.Customer;
 import Pizza.*;
-import ingredient.IngredientsMonitor;
+import Ingredient.IngredientsMonitor;
 import Table.TableManager;
 
 import java.util.*;
@@ -15,7 +14,6 @@ public class OrderProcedure {
 
 
     public OrderProcedure(TableManager tableManager, IngredientsMonitor ingredientsMonitor,OrderPreparation orderPreparation) {
-
         this.tableManager = tableManager;
         this.ingredientsMonitor = ingredientsMonitor;
         this.orderPreparation = orderPreparation;
@@ -23,14 +21,16 @@ public class OrderProcedure {
 
 
     public void createOrder(Map<Pizza, Integer> mapOfPizzasWithQuantity, boolean takeAway, Customer customer) {
-        if (!takeAway && !tableManager.assignCustomerToTable() && !ingredientsMonitor.checkIfThereIsEnoughIngredients(mapOfPizzasWithQuantity)) {
+        if (!tableManager.assignCustomerToTable() && !takeAway || !ingredientsMonitor.checkIfThereIsEnoughIngredients(mapOfPizzasWithQuantity)) {
             System.out.println("the order has been canceled");
             return;
+        }else {
+            Order order = new Order(mapOfPizzasWithQuantity, takeAway, customer);
+            orderPreparation.addOrderToQueIfNoFreeCook(order);
+            procedOrder(order);
         }
-        Order order = new Order(mapOfPizzasWithQuantity, takeAway, customer);
-        orderPreparation.addOrderToQueIfNoFreeCook(order);
-        procedOrder(order);
     }
+
 
     private void procedOrder(Order order){
         ingredientsMonitor.subIngredientUsedInOrder(order.getMapOfPizzasWithQuantity());

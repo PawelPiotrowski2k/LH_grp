@@ -30,6 +30,10 @@ public class Order {
         return customer;
     }
 
+    public double getFinalPrcie() {
+        return finalPrcie;
+    }
+
     public Map<Pizza, Integer> getMapOfPizzasWithQuantity() {
         return mapOfPizzasWithQuantity;
     }

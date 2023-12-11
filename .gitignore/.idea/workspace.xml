@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f84f908-275e-4abd-8f4b-9f4851144b4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DiscountManager/DiscountCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DiscountManager/DiscountCalculator.java" afterDir="false" />
+    <list default="true" id="b40c6016-0e68-474f-88b1-8d1c978779cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Customer/CustomerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Customer/CustomerType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Order/OrderPreparation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Order/OrderPreparation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Order/OrderProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Order/OrderProcedure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pizza/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pizza/Pizza.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pizzeria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pizzeria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ingredient/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ingredient/IngredientsMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ingredient/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ingredient/Ingredient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ingredient/IngredientsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ingredient/IngredientsMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PizzeriaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,66 +24,107 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
-  <component name="ProjectId" id="2ZOqNaQjMos5INn3s7cugDISohq" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
+  <component name="ProjectId" id="2ZPMMQjsCBfORfYTnN0RAigLEEr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Maven.Pizzeria [clean].executor": "Run",
-    "Maven.Pizzeria [test].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/LHgrp/LH_grp/Java_Fundamentals/OOP/Pizzeria",
-    "settings.editor.selected.configurable": "MavenSettings"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-    </key>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-8336523bb0d9-93b19daf" />
-      </set>
-    </attachedChunks>
+  <component name="RunManager" selected="JUnit.PizzeriaTest.createOrderAndCheckPrice">
+    <configuration name="PizzeriaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pizzeria" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PizzeriaTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PizzeriaTest.createOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pizzeria" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PizzeriaTest" />
+      <option name="METHOD_NAME" value="createOrder" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PizzeriaTest.createOrderAndCheckPrice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pizzeria" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PizzeriaTest" />
+      <option name="METHOD_NAME" value="createOrderAndCheckPrice" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PizzeriaTest.createOrderAndCheckPrice" />
+        <item itemvalue="JUnit.PizzeriaTest.createOrder" />
+        <item itemvalue="JUnit.PizzeriaTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4f84f908-275e-4abd-8f4b-9f4851144b4d" name="Changes" comment="" />
-      <created>1702303434177</created>
+      <changelist id="b40c6016-0e68-474f-88b1-8d1c978779cf" name="Changes" comment="" />
+      <created>1702319213164</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1702303434177</updated>
+      <updated>1702319213164</updated>
     </task>
     <servers />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Ingredient.Ingredient" memberName="quantityInStock" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="corn" />
+        <watch expression="((HashMap.Node)((HashMap)mapOfOrderedPizzasWithQuantity).entrySet().toArray()[0]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

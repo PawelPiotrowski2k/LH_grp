@@ -6,6 +6,7 @@ public enum CustomerType {
     STUDENT (0.6);
 
     CustomerType(double discountRate) {
+        this.discountRate = discountRate;
     }
     private double discountRate;
     public double getValue(){
