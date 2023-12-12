@@ -61,7 +61,7 @@ public class IngredientsMonitor{
     private Map<Ingredient, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
         Map<Ingredient, Integer> resultMap = new HashMap<>();
         for (Map.Entry<Pizza, Integer> listOfPizzasEntry : mapOfPizzaWithQuantity.entrySet()) {
-            Map<Ingredient, Integer> pizzaIngredients = new HashMap<>(listOfPizzasEntry.getKey().getIngredientsNeeded());
+            Map<Ingredient, Integer> pizzaIngredients = new HashMap<>(listOfPizzasEntry.getKey().ingredientsNeeded());
             for (Map.Entry<Ingredient, Integer> ingredientEntry : pizzaIngredients.entrySet()) {
                 Ingredient ingredient = ingredientEntry.getKey();
                 int quantity = ingredientEntry.getValue() * listOfPizzasEntry.getValue();

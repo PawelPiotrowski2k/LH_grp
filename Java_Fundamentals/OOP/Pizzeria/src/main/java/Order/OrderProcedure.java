@@ -1,10 +1,9 @@
 package Order;
 
-import Customer.Customer;
-import Pizza.*;
+import Pizza.Pizza;
 import Ingredient.IngredientsMonitor;
 import Table.TableManager;
-
+import Customer.Customer;
 import java.util.*;
 
 public class OrderProcedure {

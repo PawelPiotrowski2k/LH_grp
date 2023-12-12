@@ -1,7 +1,7 @@
 package Order;
 
-import DiscountManager.DiscountCalculator;
 import Customer.Customer;
+import DiscountManager.DiscountCalculator;
 import Pizza.Pizza;
 
 import java.util.Map;

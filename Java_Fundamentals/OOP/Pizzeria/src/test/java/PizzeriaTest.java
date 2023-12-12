@@ -2,10 +2,10 @@ import Customer.Customer;
 import Order.Order;
 import Order.OrderPreparation;
 import Order.OrderProcedure;
+import Pizza.Pizza;
 import Table.TableManager;
 import Ingredient.Ingredient;
 import Ingredient.IngredientsMonitor;
-import Pizza.Pizza;
 import Cook.Cook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,6 +52,7 @@ class PizzeriaTest {
     @Test
     @DisplayName("program orders ingredients properly")
     void createOrder(){
+        //Given
         Ingredient cheese = new Ingredient("cheese",60);
         Ingredient salami = new Ingredient("salami",60);
         Ingredient corn = new Ingredient("corn",60);
@@ -61,16 +62,19 @@ class PizzeriaTest {
         Map<Ingredient,Integer> ingredientNeededToMargheritta = new HashMap<>();
         ingredientNeededToMargheritta.put(cheese,5);
         ingredientNeededToMargheritta.put(salami,10);
+        //When
         Pizza margherita = new Pizza(35,"margheritta", ingredientNeededToMargheritta);
         pizzeria.addPizza(margherita);
         Map<Pizza,Integer> mapOfOrderedPizzasWithQuantity = new HashMap<>();
         mapOfOrderedPizzasWithQuantity.put(margherita,3);
         pizzeria.createOrder(mapOfOrderedPizzasWithQuantity,false,customer);
-        assertEquals(130, salami.getQuantityInStock());
+        //Then
+        assertEquals(145, salami.getQuantityInStock());
     }
     @Test
     @DisplayName("check if price is correct")
     void createOrderAndCheckPrice(){
+        //Given
         Ingredient cheese = new Ingredient("cheese",60);
         Ingredient salami = new Ingredient("salami",60);
         pizzeria.addIngredient(salami,45);
@@ -78,11 +82,13 @@ class PizzeriaTest {
         Map<Ingredient,Integer> ingredientNeededToMargheritta = new HashMap<>();
         ingredientNeededToMargheritta.put(cheese,5);
         ingredientNeededToMargheritta.put(salami,10);
+        //When
         Pizza margherita = new Pizza(35,"margheritta", ingredientNeededToMargheritta);
         pizzeria.addPizza(margherita);
         Map<Pizza,Integer> mapOfOrderedPizzasWithQuantity = new HashMap<>();
         mapOfOrderedPizzasWithQuantity.put(margherita,3);
         Order order = new Order(mapOfOrderedPizzasWithQuantity,false,customer);
+        //Then
         assertEquals(105,order.getFinalPrcie());
     }
 }

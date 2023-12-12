@@ -1,6 +1,6 @@
 package DiscountManager;
-import Customer.Customer;
 import Customer.CustomerType;
+import Customer.Customer;
 import Pizza.Pizza;
 
 import java.time.DayOfWeek;
@@ -18,9 +18,9 @@ public class DiscountCalculator {
         ) {
             Pizza pizza = entry.getKey();
             Integer quantity = entry.getValue();
-            priceWithDiscount = pizza.getPrice() * quantity + priceWithDiscount;
+            priceWithDiscount = pizza.price() * quantity + priceWithDiscount;
         }
-        CustomerType customerType = customer.getCustomerType();
+        CustomerType customerType = customer.customerType();
         switch (customerType) {
             case CHILD:
                 if (LocalDateTime.now().getDayOfWeek().equals(DayOfWeek.TUESDAY)) {
