@@ -40,10 +40,7 @@ public class IngredientsMonitor{
         }
     }
 
-    /**
-     * @FunctionalInteface
-     * x(Map<Pizza, Integer> mapOfPizzaWithQuantity, Callback<Void> callback)
-     */
+
 
     public boolean checkIfThereIsEnoughIngredients(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
         Map<Ingredient, Integer> mapOfUsedIngredients = new HashMap<>(mapIngredientsUsageFromOrder(mapOfPizzaWithQuantity));
@@ -70,23 +67,4 @@ public class IngredientsMonitor{
         }
         return resultMap;
     }
-
-
-//private Map<Ingredient, Integer> mapIngredientsUsageFromOrder(Map<Pizza, Integer> mapOfPizzaWithQuantity) {
-//    return mapOfPizzaWithQuantity.entrySet().stream()
-//            .flatMap(entry -> {
-//                Pizza pizza = entry.getKey();
-//                int quantity = entry.getValue();
-//                return pizza.getIngredientsNeeded().entrySet().stream()
-//                        .map(ingredientEntry -> {
-//                            Ingredient ingredient = ingredientEntry.getKey();
-//                            int ingredientQuantity = ingredientEntry.getValue() * quantity;
-//                            return new AbstractMap.SimpleEntry<>(ingredient, ingredientQuantity);
-//                        });
-//            })
-//            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
-//}
-
-
-
 }
