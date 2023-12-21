@@ -1,5 +1,8 @@
 package PACKAGE_NAME;
-import Filemanager;
+import PACKAGE_NAME.Filemanager.FileManager;
+
+import java.io.IOException;
+
 /*
 Create a library that allows to manage files
 Features to implement:
@@ -13,9 +16,24 @@ Deleting text from whole file or specified line
 Write tests for your implementation
  */
 public class Main {
-      public boolean fileExist(String path){}
-      public void deleteFile(String path){}
-      public void appendText(String path, String textToAppend){}
-      public void appendTextToLine(String path, String textToAppend,int lineToAppendText){}
-      public void deleteTextOnLine(String path, String textToDelete,int lineToAppendText){}
+      FileManager fileManager;
+      public Main(FileManager fileManager) {
+            this.fileManager = fileManager;
+      }
+
+      public boolean fileExist(String path){
+            return fileManager.fileExist();
+      }
+      public void deleteFile(String path){
+            fileManager.deleteFile();
+      }
+      public void appendText(String textToAppend){
+            fileManager.appendText(textToAppend);
+      }
+      public void appendTextToLine(String textToAppend,int lineToAppendText){
+            fileManager.appendTextToLine(textToAppend,lineToAppendText);
+      }
+      public void deleteTextOnLine(int lineToAppendText){
+            fileManager.deleteTextOnLine(lineToAppendText);
+      }
 }
