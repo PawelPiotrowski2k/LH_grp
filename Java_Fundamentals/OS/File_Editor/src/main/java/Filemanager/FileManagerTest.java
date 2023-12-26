@@ -1,5 +1,6 @@
-package PACKAGE_NAME.Filemanager;
+package Filemanager;
 
+import Filemanager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

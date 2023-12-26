@@ -1,7 +1,6 @@
 package PACKAGE_NAME;
-import PACKAGE_NAME.Filemanager.FileManager;
+import Filemanager.FileManager;
 
-import java.io.IOException;
 public class Main {
       FileManager fileManager;
       public Main(FileManager fileManager) {

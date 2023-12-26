@@ -1,4 +1,4 @@
-package PACKAGE_NAME.Filemanager;
+package Filemanager;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -10,9 +10,6 @@ public class FileManager {
     public FileManager(File file) {
         this.file = file;
     }
-//    public FileManager(Path file) {
-//        this.file = file.toFile();
-//    }
 
     public boolean fileExist(){
         try {
@@ -22,9 +19,12 @@ public class FileManager {
         }
 
     }
-    //walidacja czy to jet na pewno plik
+
     public boolean deleteFile(){
-        return file.delete();
+        if(file.isFile()){
+            return file.delete();
+        }
+        return false;
     }
     //walicja jaki plik został dostarczony
     //więcej walidacji
@@ -40,10 +40,11 @@ public class FileManager {
     }
     //walicja na linijke
     public void appendTextToLine(String textToAppend, int lineToAppendText){
-        //try-with-resource
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+        try (
+             FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(fileReader);
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+                ){
             StringBuilder content = new StringBuilder();
             String line = "";
             int currentLine = 0;
@@ -56,13 +57,7 @@ public class FileManager {
                 }
                 currentLine++;
             }
-            bufferedReader.close();
-            fileReader.close();
-
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(content.toString());
-            bufferedWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
