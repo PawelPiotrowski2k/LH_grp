@@ -1,27 +1,25 @@
 package Filemanager;
 
-import Filemanager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class FileManagerTest {
     FileManager fileManager;
     File file;
 
     @BeforeEach
     void setup() throws IOException {
-    file = new File("file.txt");
+        file = new File("file.txt");
         file.createNewFile();
-    fileManager = new FileManager(file);
+        fileManager = new FileManager(file);
     }
 
     @Test
     void fileExist() {
-       assertTrue(fileManager.fileExist());
+        assertTrue(fileManager.fileExist());
     }
 
     @Test

@@ -1,7 +1,14 @@
 package PACKAGE_NAME;
 import Filemanager.FileManager;
 
+import java.io.File;
+
 public class Main {
+//      public static void main(String[] args) {
+//            File file = new File("file.txt");
+//            FileManager fileManager1 = new FileManager(file);
+//            System.out.println(fileManager1.countLinesInFile());
+//      }
       FileManager fileManager;
       public Main(FileManager fileManager) {
             this.fileManager = fileManager;

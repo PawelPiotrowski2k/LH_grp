@@ -2,7 +2,8 @@ package Filemanager;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class FileManager {
     private final File file;
@@ -19,27 +20,27 @@ public class FileManager {
         }
 
     }
-
     public boolean deleteFile(){
         if(file.isFile()){
             return file.delete();
         }
         return false;
     }
-    //walicja jaki plik został dostarczony
-    //więcej walidacji
     public void appendText(String textToAppend) {
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true));
-            bufferedWriter.newLine();
-            bufferedWriter.append(textToAppend);
-            bufferedWriter.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(file.isFile()){
+            try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
+                bufferedWriter.newLine();
+                bufferedWriter.append(textToAppend);
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
-    //walicja na linijke
-    public void appendTextToLine(String textToAppend, int lineToAppendText){
+    public void appendTextToLine(String textToAppend, int lineToAppendText)  {
+        if(lineToAppendText > countLinesInFile()){
+            return;
+        }
         try (
              FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -62,7 +63,8 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
-    //usuwanie konretnego tekstu z wszystkich lini
+
+    //usuwanie konretnego tekstu z wszystkich lini koniecznie o wyjątkach
     public void deleteTextOnLine(int lineToDelete){
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -77,7 +79,6 @@ public class FileManager {
                 }
                 currentLine++;
             }
-//            Files
             bufferedReader.close();
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(content.toString());
@@ -86,5 +87,25 @@ public class FileManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    private boolean isTxtOrMdFile(){
+        return (file.getPath().endsWith(".txt") || file.getPath().endsWith(".md"));
+    }
+    private int countLinesInFile() {
+        int noOfLines = -1;
+        try (Stream<String> fileStream = Files.lines(Paths.get(file.getPath()))) {
+            return noOfLines = (int) fileStream.count();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private StringBuilder deletePhraseFromLine(String phrase, String line){
+        StringBuilder content = new StringBuilder();
+        if (line.contains(phrase)) {
+            content.append(line.replace(phrase,""));
+        }else {
+            content.append(line);
+        }
+        return content;
     }
 }
