@@ -21,13 +21,15 @@ public class FileManager {
 
     }
     public boolean deleteFile(){
-        if(file.isFile()){
+        if(isTxtOrMdFile()){
             return file.delete();
         }
         return false;
     }
     public void appendText(String textToAppend) {
-        if(file.isFile()){
+        if(!isTxtOrMdFile()) {
+            return;
+        }
             try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
                 bufferedWriter.newLine();
                 bufferedWriter.append(textToAppend);
@@ -35,7 +37,6 @@ public class FileManager {
             catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
     public void appendTextToLine(String textToAppend, int lineToAppendText)  {
         if(lineToAppendText > countLinesInFile()){
@@ -65,7 +66,7 @@ public class FileManager {
     }
 
     //usuwanie konretnego tekstu z wszystkich lini koniecznie o wyjątkach
-    public void deleteTextOnLine(int lineToDelete){
+    public void deleteTextOnLine(int lineToDelete, String textToDelete){
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             StringBuilder content = new StringBuilder();
@@ -88,6 +89,21 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
+    public void deleteTextInFile(String textToDelete){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+        ){
+            StringBuilder content = new StringBuilder();
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null){
+              deletePhraseFromLine(textToDelete, line);
+            }
+            bufferedWriter.write(content.toString());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private boolean isTxtOrMdFile(){
         return (file.getPath().endsWith(".txt") || file.getPath().endsWith(".md"));
     }
@@ -97,6 +113,7 @@ public class FileManager {
             return noOfLines = (int) fileStream.count();
         } catch (IOException e) {
             throw new RuntimeException(e);
+
         }
     }
     private StringBuilder deletePhraseFromLine(String phrase, String line){
