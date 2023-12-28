@@ -18,7 +18,7 @@ class FileManagerTest {
     }
 
     @Test
-    void fileExist() {
+    void fileExist() throws FileNotFoundException{
         assertTrue(fileManager.fileExist());
     }
 
@@ -28,7 +28,7 @@ class FileManagerTest {
     }
 
     @Test
-    void appendText() {
+    void appendText() throws FileNotFoundException{
         //@TempDir
         fileManager.appendText("text");
         try {
@@ -48,7 +48,7 @@ class FileManagerTest {
     }
 
     @Test
-    void appendTextToLine() {
+    void appendTextToLine() throws FileNotFoundException {
         fileManager.appendTextToLine("string",3);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -71,7 +71,7 @@ class FileManagerTest {
 
     @Test
     void deleteTextOnLine() {
-        fileManager.deleteTextOnLine(3);
+        fileManager.deleteTextOnLine(3,"ing");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = "";
@@ -82,12 +82,16 @@ class FileManagerTest {
                 }
                 currentline++;
             }
-            assertTrue(line.equals(""));
+            assertTrue(line.equals("str"));
             bufferedReader.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Test
+    void deleteTextFromFile(){
+        fileManager.deleteTextInFile("xt");
     }
 }
