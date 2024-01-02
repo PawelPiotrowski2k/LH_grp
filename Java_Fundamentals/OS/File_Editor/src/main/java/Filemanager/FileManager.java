@@ -2,7 +2,9 @@ package Filemanager;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 public class FileManager {
@@ -41,25 +43,27 @@ public class FileManager {
         if (lineToAppendText > countLinesInFile() && !isTxtOrMdFile()) {
             return;
         }
-        try (
-                FileReader fileReader = new FileReader(file);
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-        ) {
-            StringBuilder content = new StringBuilder();
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            File tempFile = File.createTempFile("tempfile", ".tmp");
+            BufferedWriter writeTemp = new BufferedWriter(new FileWriter(tempFile));
             String line = "";
             int currentLine = 0;
             while ((line = bufferedReader.readLine()) != null) {
                 if (currentLine - lineToAppendText == -1) {
-                    content.append(textToAppend).append(System.lineSeparator());
-                    content.append(line).append(System.lineSeparator());
+                    writeTemp.write(textToAppend);
+                    writeTemp.newLine();
                 } else {
-                    content.append(line).append(System.lineSeparator());
+                    writeTemp.write(line);
+                    writeTemp.newLine();
                 }
                 currentLine++;
             }
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(content.toString());
-            bufferedWriter.close();
+            bufferedReader.close();
+            fileReader.close();
+            writeTemp.close();
+            Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("file not found");
         } catch (IOException e) {
@@ -88,7 +92,6 @@ public class FileManager {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(content.toString());
             bufferedWriter.close();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -127,7 +130,6 @@ public class FileManager {
             return noOfLines = (int) fileStream.count();
         } catch (IOException e) {
             throw new RuntimeException(e);
-
         }
     }
 
