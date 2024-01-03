@@ -43,9 +43,9 @@ public class FileManager {
         if (lineToAppendText > countLinesInFile() && !isTxtOrMdFile()) {
             return;
         }
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+        try (FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)){
+
             File tempFile = File.createTempFile("tempfile", ".tmp");
             BufferedWriter writeTemp = new BufferedWriter(new FileWriter(tempFile));
             String line = "";
@@ -60,8 +60,6 @@ public class FileManager {
                 }
                 currentLine++;
             }
-            bufferedReader.close();
-            fileReader.close();
             writeTemp.close();
             Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (FileNotFoundException e) {
@@ -75,8 +73,8 @@ public class FileManager {
         if (lineToDelete > countLinesInFile() && !isTxtOrMdFile()) {
             return;
         }
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
+
             StringBuilder content = new StringBuilder();
             String line = "";
             int currentLine = 0;
@@ -88,7 +86,6 @@ public class FileManager {
                 }
                 currentLine++;
             }
-            bufferedReader.close();
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(content.toString());
             bufferedWriter.close();
