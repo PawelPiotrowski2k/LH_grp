@@ -11,10 +11,15 @@ public class FileManager {
     private final File file;
 
     public FileManager(File file) {
-        this.file = file;
+        if(isTxtOrMdFile()){
+            this.file = file;
+        }else {
+            this.file = null;
+            System.out.println("this file is not txt or md");
+        }
     }
 
-    public boolean fileExist() throws FileNotFoundException {
+    public boolean fileExist(){
         return file.exists();
     }
 
@@ -33,6 +38,7 @@ public class FileManager {
             bufferedWriter.newLine();
             bufferedWriter.append(textToAppend);
         } catch (FileNotFoundException e) {
+            //FileManagerException
             throw new FileNotFoundException("file not found");
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,8 +49,11 @@ public class FileManager {
         if (lineToAppendText > countLinesInFile() && !isTxtOrMdFile()) {
             return;
         }
+        //RandomAccessFile
+        //FileUtils/FilesUtil -> appache io
+        //Files
         try (FileReader fileReader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)){
+            BufferedReader bufferedReader = new BufferedReader(fileReader)){
 
             File tempFile = File.createTempFile("tempfile", ".tmp");
             BufferedWriter writeTemp = new BufferedWriter(new FileWriter(tempFile));
@@ -54,6 +63,7 @@ public class FileManager {
                 if (currentLine - lineToAppendText == -1) {
                     writeTemp.write(textToAppend);
                     writeTemp.newLine();
+                    //metoda write do konkretnej linijki
                 } else {
                     writeTemp.write(line);
                     writeTemp.newLine();

@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 class FileManagerTest {
@@ -18,8 +19,6 @@ class FileManagerTest {
         tempFile = new File(tempDir.toFile(),"testFile.txt");
         tempFile.createNewFile();
         fillFileWithText(tempFile);
-//        File tempFile = File.createTempFile("tmp",".txt");
-//        fillFileWithText(tempFile);
         fileManager = new FileManager(tempFile);
     }
     void fillFileWithText(File file) throws FileNotFoundException {
@@ -107,6 +106,8 @@ class FileManagerTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+       // Files.readAllLines(Paths.get("")); <----
     }
     @Test
     void deleteTextFromFile(){
