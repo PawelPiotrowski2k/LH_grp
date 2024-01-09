@@ -1,5 +1,7 @@
 package Filemanager;
 
+import FileManagerExeption.FileManagerExeption;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,12 +12,11 @@ import java.util.stream.Stream;
 public class FileManager {
     private final File file;
 
-    public FileManager(File file) {
-        if(isTxtOrMdFile()){
+    public FileManager(File file) throws FileManagerExeption {
+        if(isTxtOrMdFile(file)){
             this.file = file;
         }else {
-            this.file = null;
-            System.out.println("this file is not txt or md");
+            throw new FileManagerExeption("There was a problem with File");
         }
     }
 
@@ -24,37 +25,28 @@ public class FileManager {
     }
 
     public boolean deleteFile() {
-        if (isTxtOrMdFile()) {
             return file.delete();
-        }
-        return false;
     }
 
-    public void appendText(String textToAppend) throws FileNotFoundException {
-        if (!isTxtOrMdFile()) {
-            return;
-        }
+    public void appendText(String textToAppend) throws FileManagerExeption {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
             bufferedWriter.newLine();
             bufferedWriter.append(textToAppend);
         } catch (FileNotFoundException e) {
-            //FileManagerException
-            throw new FileNotFoundException("file not found");
+            throw new FileManagerExeption("File not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw  new FileManagerExeption("There was a problem with File");
         }
     }
-
-    public void appendTextToLine(String textToAppend, int lineToAppendText) throws FileNotFoundException {
-        if (lineToAppendText > countLinesInFile() && !isTxtOrMdFile()) {
+    //RandomAccessFile
+    //FileUtils/FilesUtil -> appache io
+    //Files
+    public void appendTextToLine(String textToAppend, int lineToAppendText) throws FileManagerExeption {
+        if (lineToAppendText > countLinesInFile()) {
             return;
         }
-        //RandomAccessFile
-        //FileUtils/FilesUtil -> appache io
-        //Files
         try (FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader)){
-
             File tempFile = File.createTempFile("tempfile", ".tmp");
             BufferedWriter writeTemp = new BufferedWriter(new FileWriter(tempFile));
             String line = "";
@@ -63,7 +55,6 @@ public class FileManager {
                 if (currentLine - lineToAppendText == -1) {
                     writeTemp.write(textToAppend);
                     writeTemp.newLine();
-                    //metoda write do konkretnej linijki
                 } else {
                     writeTemp.write(line);
                     writeTemp.newLine();
@@ -71,43 +62,42 @@ public class FileManager {
                 currentLine++;
             }
             writeTemp.close();
+            bufferedReader.close();
             Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("file not found");
+            throw new FileManagerExeption("file not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FileManagerExeption("There was a problem with file");
         }
     }
 
-    public void deleteTextOnLine(int lineToDelete, String textToDelete) {
-        if (lineToDelete > countLinesInFile() && !isTxtOrMdFile()) {
+    public void deleteTextOnLine(int lineToDelete, String textToDelete) throws FileManagerExeption {
+        if (lineToDelete > countLinesInFile()) {
             return;
         }
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
-
-            StringBuilder content = new StringBuilder();
+            File tempFile = File.createTempFile("tempfile", ".tmp");
+            BufferedWriter writeTemp = new BufferedWriter(new FileWriter(tempFile));
             String line = "";
             int currentLine = 0;
             while ((line = bufferedReader.readLine()) != null) {
                 if (currentLine - lineToDelete == -1) {
-                    content.append(line.replace(textToDelete, "")).append(System.lineSeparator());
+                    writeTemp.write("");
                 } else {
-                    content.append(line).append(System.lineSeparator());
+                    writeTemp.write(line.replaceAll(textToDelete,""));
+                    writeTemp.newLine();
                 }
                 currentLine++;
             }
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(content.toString());
-            bufferedWriter.close();
+            writeTemp.close();
+            bufferedReader.close();
+            Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileManagerExeption("file not found");
         }
     }
 
-    public void deleteTextInFile(String textToDelete) {
-        if (!isTxtOrMdFile()) {
-            return;
-        }
+    public void deleteTextInFile(String textToDelete) throws FileManagerExeption {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
         ) {
             StringBuilder content = new StringBuilder();
@@ -122,21 +112,24 @@ public class FileManager {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(content.toString());
             bufferedWriter.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e){
+            throw new FileManagerExeption("file not found");
+        } catch(IOException e) {
+            throw new FileManagerExeption("There was a problem with file");
         }
     }
 
-    private boolean isTxtOrMdFile() {
-        return (file.getPath().endsWith(".txt") || file.getPath().endsWith(".md"));
+    private boolean isTxtOrMdFile(File file) {
+        return file.getPath().endsWith(".txt") || file.getPath().endsWith(".md");
     }
 
-    private int countLinesInFile() {
-        int noOfLines = -1;
+    private int countLinesInFile() throws FileManagerExeption {
         try (Stream<String> fileStream = Files.lines(Paths.get(file.getPath()))) {
-            return noOfLines = (int) fileStream.count();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            return (int) fileStream.count();
+        } catch (FileNotFoundException e) {
+            throw new FileManagerExeption("File not found");
+        }catch (IOException e){
+            throw new FileManagerExeption("There was a problem with file");
         }
     }
 
