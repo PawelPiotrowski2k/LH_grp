@@ -1,8 +1,8 @@
 package org.example;
 
-import com.itextpdf.text.pdf.parser.clipper.Path;
 import picocli.CommandLine;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -13,14 +13,21 @@ public class Picocli implements Runnable{
 
     @CommandLine.Option(names = {"-b", "--optionB"}, arity = "2", description = "create pdf from JSON. Path to save pdf file/ Path to JSON file")
     private List<String> optionB;
+
     @Override
     public void run() {
         if (optionA != null){
             PdfCreator pdfCreator = new PdfCreator(Paths.get(optionA.get(0)),Paths.get(optionA.get(1)),Paths.get(optionA.get(2)));
             pdfCreator.createPdfFromXMLSchema();
         } else if (optionB != null){
-            PdfCreator pdfCreator = new PdfCreator(Paths.get(optionB.get(0)),Paths.get(optionB.get(1)));
-            pdfCreator.createPdfFromJSON();
+            PdfFromJSON pdfFromJSON = new PdfFromJSON(optionB.get(0),optionB.get(1));
+            try {
+                pdfFromJSON.createPDF();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
