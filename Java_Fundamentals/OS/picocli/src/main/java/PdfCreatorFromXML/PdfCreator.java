@@ -1,4 +1,4 @@
-package org.example;
+package PdfCreatorFromXML;
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -11,8 +11,8 @@ import java.nio.file.Path;
 
 public class PdfCreator {
     private final Path pathToSavePdfFile;
-    private Path pathToXMLSchema;
-    private Path pathToXSLFile;
+    private final Path pathToXMLSchema;
+    private final Path pathToXSLFile;
 
     public PdfCreator(Path pathToSavePdfFile, Path pathToXMLSchema, Path pathToXSLFile) {
         this.pathToSavePdfFile = pathToSavePdfFile;
@@ -20,7 +20,7 @@ public class PdfCreator {
         this.pathToXSLFile = pathToXSLFile;
     }
 
-    public void createPdfFromXMLSchema() {
+    public void createPdfFromXMLSchema() throws PdfCreatorException {
         try {
             FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -32,17 +32,17 @@ public class PdfCreator {
             Source source = new StreamSource(new File(String.valueOf(pathToXMLSchema)));
             transformer.transform(source, result);
             out.close();
-            System.out.println("Plik PDF utworzony pomyślnie.");
+            System.out.println("pdf File Created Succesfully");
         } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            throw new PdfCreatorException("transformer cnfiguration exception");
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new PdfCreatorException("File not found");
         } catch (FOPException e) {
-            throw new RuntimeException(e);
+            throw new PdfCreatorException("Acces denied");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            throw new PdfCreatorException("transformer exception");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new PdfCreatorException("IO Exception there is something wrong with file");
         }
     }
 }

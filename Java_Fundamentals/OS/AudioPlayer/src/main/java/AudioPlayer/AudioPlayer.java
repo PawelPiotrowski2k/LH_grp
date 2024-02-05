@@ -1,9 +1,8 @@
+package AudioPlayer;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 
 public class AudioPlayer {
     private final String filePath;
@@ -11,7 +10,7 @@ public class AudioPlayer {
     public AudioPlayer(String filePath) {
         this.filePath = filePath;
     }
-    public void playSound(){
+    public void playSound() throws AudioPlayerException {
         File musicFile = new File(filePath);
         if(musicFile.exists()){
             try {
@@ -28,13 +27,13 @@ public class AudioPlayer {
                 Thread.sleep(durationInMS);
                 clip.close();
             } catch (UnsupportedAudioFileException e) {
-                throw new RuntimeException(e);
+                throw new AudioPlayerException("File should be .wav file");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new AudioPlayerException("There was a trouble to open file");
             } catch (LineUnavailableException e) {
-                throw new RuntimeException(e);
+                throw new AudioPlayerException("Line Unavailable Exception");
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new AudioPlayerException("Sound was interupted for some reason");
             }
         }else {
             System.out.println("Cant find File");

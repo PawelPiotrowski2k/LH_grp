@@ -1,5 +1,3 @@
-package org.example;
-
 import picocli.CommandLine;
 
 public class Main {

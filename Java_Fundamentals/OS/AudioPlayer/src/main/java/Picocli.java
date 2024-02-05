@@ -1,3 +1,5 @@
+import AudioPlayer.AudioPlayer;
+import AudioPlayer.AudioPlayerException;
 import picocli.CommandLine;
 
 
@@ -9,7 +11,10 @@ public class Picocli implements Runnable{
     @Override
     public void run() {
         AudioPlayer audioPlayer = new AudioPlayer(pathToFile);
-        audioPlayer.playSound();
-
+        try {
+            audioPlayer.playSound();
+        } catch (AudioPlayerException e) {
+            throw new RuntimeException("e");
+        }
     }
 }
