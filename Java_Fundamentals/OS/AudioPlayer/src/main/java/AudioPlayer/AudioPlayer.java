@@ -12,19 +12,13 @@ public class AudioPlayer {
     }
     public void playSound() throws AudioPlayerException {
         File musicFile = new File(filePath);
-        if(musicFile.exists()){
             try {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
                 AudioFormat audioFormat = audioInput.getFormat();
-                long audioFileLength = musicFile.length();
-                int frameSize = audioFormat.getFrameSize();
-                float frameRate = audioFormat.getFrameRate();
-                float durationInSeconds = (audioFileLength / (frameSize * frameRate));
-                long durationInMS = (long) (durationInSeconds * 1000);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-                Thread.sleep(durationInMS);
+                Thread.sleep(soundFileDurationInMS(musicFile,audioFormat));
                 clip.close();
             } catch (UnsupportedAudioFileException e) {
                 throw new AudioPlayerException("File should be .wav file");
@@ -35,8 +29,13 @@ public class AudioPlayer {
             } catch (InterruptedException e) {
                 throw new AudioPlayerException("Sound was interupted for some reason");
             }
-        }else {
-            System.out.println("Cant find File");
         }
+    private long soundFileDurationInMS(File musicFile, AudioFormat audioFormat){
+        long audioFileLength = musicFile.length();
+        int frameSize = audioFormat.getFrameSize();
+        float frameRate = audioFormat.getFrameRate();
+        float durationInSeconds = (audioFileLength / (frameSize * frameRate));
+        return (long) (durationInSeconds * 1000);
     }
-}
+    }
+
