@@ -14,7 +14,7 @@ public class Picocli implements Runnable{
         try {
             audioPlayer.playSound();
         } catch (AudioPlayerException e) {
-            throw new RuntimeException("e");
+            throw new RuntimeException("Audio player has stopped for some reason");
         }
     }
 }
