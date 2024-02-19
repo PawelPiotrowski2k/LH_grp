@@ -1,0 +1,41 @@
+{
+  "invoice": {
+    "invoice-number": 123456,
+    "invoice-date": "2022-12-01",
+    "company": {
+      "name": "Acme Inc.",
+      "address": {
+        "street": "123 Main St.",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": 12345
+      }
+    },
+    "customer": {
+      "name": "John Doe",
+      "address": {
+        "street": "456 Elm St.",
+        "city": "Sometown",
+        "state": "NY",
+        "zip": 67890
+      }
+    },
+    "payment-due-date": "2022-12-15",
+    "items": {
+      "item": [
+        {
+          "description": "Item 1",
+          "quantity": 1,
+          "unit-price": 100,
+          "amount": 100
+        },
+        {
+          "description": "Item 2",
+          "quantity": 2,
+          "unit-price": 50,
+          "amount": 100
+        }
+      ]
+    }
+  }
+}

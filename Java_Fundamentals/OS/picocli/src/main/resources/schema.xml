@@ -23,7 +23,7 @@
     <payment-due-date>2022-12-15</payment-due-date>
     <items>
         <item>
-            <description>Item 1</description>
+            <description>Item 12</description>
             <quantity>1</quantity>
             <unit-price>100.00</unit-price>
             <amount>100.00</amount>
