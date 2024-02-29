@@ -6,43 +6,38 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
 
 public class Decryption3DES {
-    private static final String pathToHiddenFile = "C:\\Users\\admin\\.passwords";
-    private static final String UNICODE_FORMAT = "UTF8";
+    private final String UNICODE_FORMAT = "UTF8";
+    private final String DESDE_ENCRYPTION_SCHEME = "DESede";
+    private final String pathToHiddenFile = "C:\\Users\\Pawel\\.passwords";
     private final String appName;
-//    final private KeySpec ks;
-//    final private SecretKeyFactory skf;
     private byte[] passwordInBytes;
-//    private static final String DESDE_ENCRYPTION_SCHEME = "DESede";
-//    private final String myDescryptionScheme;
     private Cipher cipher;
-    final byte[] arrayBytes;
+    private byte[] IV;
+    private final byte[] arrayBytes;
     private String myDecryptionKey;
     private SecretKey key;
 
-    public Decryption3DES(String appName) throws Decryption3DESException, UnsupportedEncodingException, InvalidKeySpecException, InvalidKeyException, NoSuchAlgorithmException {
+    public Decryption3DES(String appName) throws Decryption3DESException, UnsupportedEncodingException {
         this.myDecryptionKey = "randomWord";
-//        myDescryptionScheme = DESDE_ENCRYPTION_SCHEME;
         arrayBytes = myDecryptionKey.getBytes(UNICODE_FORMAT);
-//        ks = new DESedeKeySpec(arrayBytes);
-//        skf = SecretKeyFactory.getInstance(myDescryptionScheme);
-//        key = skf.generateSecret(ks);
         this.appName = appName;
         readFieldFromFile();
     }
 
-    public static void main(String[] args) throws UnsupportedEncodingException, Decryption3DESException, InvalidKeySpecException, NoSuchAlgorithmException, InvalidKeyException, Encryption3DESException {
+    public static void main(String[] args) throws UnsupportedEncodingException, Decryption3DESException, Encryption3DESException {
         Decryption3DES decryption3DES = new Decryption3DES("spotify");
         decryption3DES.readFieldFromFile();
         System.out.println(decryption3DES.decrypt());
@@ -52,7 +47,7 @@ public class Decryption3DES {
         String decryptedText = null;
         try {
             cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE,key);
+            cipher.init(Cipher.DECRYPT_MODE,key,new IvParameterSpec(IV));
             byte[] encryptedText = passwordInBytes;
             byte[] plainText = cipher.doFinal(encryptedText);
             decryptedText = new String(plainText);
@@ -63,9 +58,9 @@ public class Decryption3DES {
         } catch (InvalidKeyException e) {
             throw new Encryption3DESException("invalid key" + e);
         } catch (NoSuchPaddingException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new Encryption3DESException("no such padding" + e);
+        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException e) {
+            throw new Encryption3DESException("no such algorithm" + e);
         }
         return decryptedText;
     }
@@ -81,7 +76,9 @@ public class Decryption3DES {
                     String pswd = (String) jsonObject.get("password");
                     this.passwordInBytes = decode(pswd);
                     String secretkey = (String) jsonObject.get("key");
-                    this.key = new SecretKeySpec(decode(secretkey), "DESede");
+                    this.key = new SecretKeySpec(decode(secretkey), DESDE_ENCRYPTION_SCHEME);
+                    this.IV = decode((String) jsonObject.get("IV"));
+
                 }else{
                     throw new Decryption3DESException("aplication was not found");
                 }

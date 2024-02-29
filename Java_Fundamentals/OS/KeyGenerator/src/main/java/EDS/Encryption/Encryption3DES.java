@@ -5,23 +5,20 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class Encryption3DES {
-private static final String UNICODE_FORMAT = "UTF-8";
-private final String pathToHiddenFile = "C:\\Users\\admin\\.passwords";
-private static final String DESDE_ENCRYPTION_SCHEME = "DESede";
-//final private KeySpec ks;
-//final private SecretKeyFactory skf;
+private final String UNICODE_FORMAT = "UTF-8";
+private final String DESDE_ENCRYPTION_SCHEME = "DESede";
+private final int KEY_SIZE = 112;
+private final String pathToHiddenFile = "C:\\Users\\Pawel\\.passwords";
 private Cipher cipher;
-//final byte[] arrayBytes;
-//final private String myEncryptionKey;
-//final private String myEncryptionScheme;
-    private final static int KEY_SIZE = 112;
-final SecretKey key;
+private final SecretKey key;
+private final SecretKeySpec sks;
 private final String appName;
 private final String password;
 
@@ -32,12 +29,7 @@ public Encryption3DES(String appName, String password) throws Encryption3DESExce
         KeyGenerator generator = KeyGenerator.getInstance(DESDE_ENCRYPTION_SCHEME);
         generator.init(KEY_SIZE);
         key = generator.generateKey();
-//        myEncryptionKey = "randomWord";
-//        myEncryptionScheme = DESDE_ENCRYPTION_SCHEME;
-//        arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
-//        ks = new DESedeKeySpec(arrayBytes);
-//        skf = SecretKeyFactory.getInstance(myEncryptionScheme);
-//        key = skf.generateSecret(ks);
+        this.sks = new SecretKeySpec(key.getEncoded(),DESDE_ENCRYPTION_SCHEME);
     } catch (NoSuchAlgorithmException e){
         throw new Encryption3DESException("no such algorithm" + e);
     }
@@ -91,7 +83,8 @@ public String encrypt() throws Encryption3DESException {
         JSONObject newData = new JSONObject();
         newData.put("AppName", appName);
         newData.put("password", encrypt());
-        newData.put("key", encode(key.getEncoded()));
+        newData.put("key", encode(sks.getEncoded()));
+        newData.put("IV", encode(cipher.getIV()));
         jsonArray.put(newData);
         try (FileWriter fileWriter = new FileWriter(pathToHiddenFile)) {
             fileWriter.write(jsonArray.toString(4));
