@@ -1,0 +1,96 @@
+<!-- Konfiguracja wydruku (UWAGA: w razie modyfikacji zachować tą samą składnię i liczbę linii)
+  nazwa dokumentu #Odbiór nadgodzin
+  opis            #Standard
+  lewy_margines   #15
+  prawy_margines  #15
+  górny_margines  #10
+  dolny_margines  #10
+  orientacja      #0
+  styl czcionki   #Arial Narrow
+  rozmiar czcionki#12
+  jasny           #1
+  normalny        #2
+  ciemny          #3
+  linia           #0
+  bez szarości    #Nie
+  w jakich oknach #
+  menu drukowania #Tak
+  nagłówek/stopka #Nie
+  inne            #0
+  liczba stron    #1
+-->
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+  <TITLE>#HTMLTitle#</TITLE>
+</HEAD>
+<BODY>
+<!-- TU MOŻNA ZACZĄĆ WŁAŚCIWĄ TREŚĆ DOKUMENTU -->
+
+#LOOP Zestawienia SQL#<!-- POCZĄTEK PĘTLI -->
+
+<img src=#F_Logo# width="190" height="99">
+<br><br><br>
+Leszno, dnia #AktualnaData# <br><br>
+#SQL_06# <br>
+<B> #SQL_01# #SQL_02# </B>
+<br><br>
+<p style="text-align: justify">
+Działając na mocy art. 1513 Kodeksu pracy, w związku z poleconą #SQL_07# pracą w dniu
+
+<I>
+ #SQL_03#.#SQL_04#.#SQL_05#
+</I>
+
+będącym dniem wolnym z tytułu przeciętnie pięciodniowego tygodnia pracy,
+proponuję odebranie dnia wolnego w terminie
+</P>
+<I>
+..............................................
+</I>
+<p>
+<br><br><br>
+<Table>
+<tr>
+  <td style="height:100px">
+    Podpis bezpośredniego przełożonego
+  </td>
+</tr>
+<tr>
+  <td>
+   ...........................................
+  </td>
+</tr>
+
+<tr>
+  <td style="height:100px">
+    Wyrażam zgodę/nie wyrażam zgody*
+  </td>
+</tr>
+<tr>
+  <td>
+   ...........................................
+  </td>
+</tr>
+<tr>
+  <td>
+   data i podpis pracownika
+  </td>
+</tr>
+</Table>
+<br>
+*- niepotrzebne skreślić <br>
+Podstawa prawna: <br>
+ü  art. 151(3) Kodeksu pracy <br>
+ü  § 6 pkt 1) ppkt c) Rozporządzenie Ministra Rodziny, Pracy i Polityki Społecznej z dnia 10 grudnia 2018 r. w sprawie dokumentacji pracowniczej (Dz. U. z 2018 r. poz. 2369).<br>
+</p>
+
+<!-- NOWA STRONA -->
+
+
+#ENDLOOP#<!-- KONIEC PĘTLI -->
+
+
+<!-- TU NALEŻY ZAKOŃCZYĆ WŁAŚCIWĄ TREŚĆ DOKUMENTU -->
+</BODY>
+</HTML>
