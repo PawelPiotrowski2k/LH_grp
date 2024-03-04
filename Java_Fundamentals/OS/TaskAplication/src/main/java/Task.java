@@ -1,14 +1,16 @@
 import java.util.List;
 
 public class Task {
+    private final int id;
     private final User user;
     private final String description;
     private final String place;
-    private final List<Device> listOfDevices;
+    private final List<String> listOfDevices;
     private Status status;
 
 
-    public Task(User user, String description, String place, List<Device> listOfDevices) {
+    public Task(int id, User user, String description, String place, List<String> listOfDevices) {
+        this.id = id;
         this.user = user;
         this.description = description;
         this.place = place;
@@ -19,13 +21,9 @@ public class Task {
     public void changeStatus(Status status){
         this.status = status;
     }
-    public void addDevice(Device device){
-        listOfDevices.add(device);
+    public void addDevice(){
     }
-    public void deleteDevice(Device device){
-        if(listOfDevices.contains(device)){
-            listOfDevices.remove(device);
-        }
+    public void deleteDevice(){
     }
 
     public User getUser() {
@@ -44,7 +42,7 @@ public class Task {
         return status;
     }
 
-    public List<Device> getListOfDevices() {
+    public List<String> getListOfDevices() {
         return listOfDevices;
     }
 }

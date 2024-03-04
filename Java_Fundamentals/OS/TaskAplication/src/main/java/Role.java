@@ -1,4 +1,9 @@
 public enum Role {
-    USER,
-    ADMIN;
+    USER("user"),
+    ADMIN("amdin");
+    String value;
+
+    Role(String value) {
+        this.value = value;
+    }
 }
