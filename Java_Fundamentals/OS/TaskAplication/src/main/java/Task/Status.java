@@ -1,9 +1,11 @@
+package Task;
+
 public enum Status {
-    SENT("wysłano"),
-    REJECTED("odrzucono"),
+    SENT("Wyslany"),
+    REJECTED("Odrzucony"),
     APROVED("zatwierdzono"),
-    IN_PROGRESS("w trakcie realizacji"),
-    ENDED("zakończono");
+    IN_PROGRESS("W trakcie realizacji"),
+    ENDED("Zakończony");
 
     String value;
     Status(String value){

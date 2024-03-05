@@ -1,3 +1,5 @@
+package GUI;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,15 +18,13 @@ public class Logingin extends JFrame{
         mainPanel.setPreferredSize(new Dimension(400, 400));
         setContentPane(mainPanel);
         createUIComponents();
-        setTitle("Task Manager");
+        setTitle("TaskManager.Task Manager");
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Logingin loginFrame = new Logingin();
-        });
+        Logingin loginFrame = new Logingin();
     }
 }
