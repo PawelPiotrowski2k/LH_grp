@@ -1,5 +1,8 @@
 import Authentication.Authentication;
+import Authentication.AuthenticationException;
+import Device.Device;
 import Device.DeviceManager;
+import Device.DeviceManagerException;
 import EncryptionDecryption.EncryptionException;
 import Task.Task;
 import Task.TaskManager;
@@ -43,5 +46,18 @@ public class TaskAplication {
     public void createTask(String mail,String desription,String status,String place, List<Integer> listOfDevicesId) throws TaskManagerException {
         taskManager.createTask(mail,desription,status,place,listOfDevicesId);
     }
+    public void addDevice(String device) throws DeviceManagerException {
+        deviceManager.addDevice(device);
+    }
+    public void removeDevice(int id) throws DeviceManagerException {
+        deviceManager.removeDevice(id);
+    }
+    public Map<Integer,Device> getDeviceMap() throws DeviceManagerException {
+        return deviceManager.getMapOfDevices();
+    }
+    public User loginUser(String mail,String password) throws AuthenticationException {
+        return authentication.LogInUser(mail,password);
+    }
+
 
 }
