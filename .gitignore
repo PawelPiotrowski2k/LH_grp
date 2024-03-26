@@ -9,4 +9,8 @@ out/
 *.iws
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
+<<<<<<< HEAD
 !**/src/test/**/target/
+=======
+!**/src/test/**/target/
+>>>>>>> a986f40b189702a4c9f30eae1133d003bf1d3c4a
