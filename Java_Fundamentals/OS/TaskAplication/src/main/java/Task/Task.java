@@ -1,12 +1,5 @@
 package Task;
 
-import DBconnection.DbConnection;
-import User.User;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class Task {
@@ -16,7 +9,6 @@ public class Task {
     private final List<Integer> listOfDevicesId;
     private final int id;
     private final String status;
-    DbConnection dbConnection = new DbConnection();
 
 
     public Task(int id, String email, String description, String place, List<Integer> listOfDevicesId,String status) {
@@ -36,5 +28,8 @@ public class Task {
 
     public int getId(){
         return id;
+    }
+    public String getEmail(){
+        return email;
     }
 }

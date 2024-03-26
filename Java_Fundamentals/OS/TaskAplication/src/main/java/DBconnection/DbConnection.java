@@ -1,13 +1,23 @@
 package DBconnection;
 
+import Config.ConfigManager;
+import org.checkerframework.checker.units.qual.C;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbConnection {
-    private final static String url = "jdbc:mysql://localhost:3306/my_schema";
-    private final String username = "admin";
-    private final String pasword = "admin";
+    private String url;
+    private String username;
+    private String pasword;
+
+    public DbConnection() {
+        ConfigManager configManager = new ConfigManager();
+        this.url = configManager.getDbUrl();
+        this.username = configManager.getDbUsername();
+        this.pasword = configManager.getDbPassword();
+    }
 
     public Connection getConnection() {
         try {

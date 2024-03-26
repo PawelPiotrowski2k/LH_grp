@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class DeviceManager {
     Map<Integer,Device> deviceMap;

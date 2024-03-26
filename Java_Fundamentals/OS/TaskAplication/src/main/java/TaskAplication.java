@@ -4,12 +4,14 @@ import Device.Device;
 import Device.DeviceManager;
 import Device.DeviceManagerException;
 import EncryptionDecryption.EncryptionException;
+import MailSender.MailSender;
 import Task.Task;
 import Task.TaskManager;
 import Task.TaskManagerException;
 import User.User;
 import User.UserManager;
 import User.UserManagerException;
+import MailSender.MailSenderException;
 
 import java.util.List;
 import java.util.Map;
@@ -37,8 +39,11 @@ public class TaskAplication {
     public Map<String,User> getUsers() throws UserManagerException {
        return userManager.getUsers();
     }
-    public Map<Integer,Task> getTasks() throws TaskManagerException {
-       return taskManager.getTaskMap();
+    public Map<Integer,Task> getAllTasks() throws TaskManagerException {
+       return taskManager.getAllTaskMap();
+    }
+    public Map<Integer,Task> getUsersTasks(String mail)throws TaskManagerException{
+        return taskManager.getUsersTaskMap(mail);
     }
     public void changeTaskStatus(String status, int id) throws TaskManagerException {
         taskManager.changeStatus(status, id);
@@ -56,8 +61,9 @@ public class TaskAplication {
         return deviceManager.getMapOfDevices();
     }
     public User loginUser(String mail,String password) throws AuthenticationException {
-        return authentication.LogInUser(mail,password);
+        return authentication.logInUser(mail,password);
     }
-
-
+    public void sendMail() throws MailSenderException {
+        mailSender.SendMessage();
+    }
 }

@@ -1,0 +1,12 @@
+config.properties
+*.config
+target/
+bin/
+out/
+.idea/
+*.iml
+*.ipr
+*.iws
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/

@@ -10,34 +10,31 @@ import java.util.*;
 
 public class TaskManager {
     DbConnection dbConnection = new DbConnection();
-    public Map<Integer,Task> getTaskMap() throws TaskManagerException {
-        int lastId = calculateId() - 1;
-        int currentid = 1;
+    public Map<Integer,Task> getUsersTaskMap(String mail) throws TaskManagerException {
         Map<Integer,Task> taskMap = new HashMap<>();
         try {
-            for (int i = currentid; i <= lastId; i++) {
-                int id = 0;
-                String email = "";
-                String description = "";
-                String status = "";
-                String place = "";
-                List<Integer> deviceList = new ArrayList<>();
-
-                String query2 = "SELECT * FROM task WHERE id = " + i;
-                Statement statement1 = dbConnection.getConnection().createStatement();
-                ResultSet resultSet1 = statement1.executeQuery(query2);
-                while (resultSet1.next()){
-                    id = resultSet1.getInt("id");
-                    email = resultSet1.getString("mail");
-                    description = resultSet1.getString("description");
-                    status = resultSet1.getString("status");
-                    place = resultSet1.getString("place");
-                    deviceList.add(resultSet1.getInt("id_device"));
-                }
-                taskMap.put(id,new Task(id,email,description,place,deviceList,status));
+            String query = "SELECT distinct id FROM task where mail = '" + mail + "'";
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                taskMap.put(resultSet.getInt("id"),getTaskFromId(resultSet.getInt("id")));
             }
         }catch (SQLException e){
-            throw new TaskManagerException("SQL exception " + e);
+            throw new TaskManagerException("sql exception " + e);
+        }
+        return taskMap;
+    }
+    public Map<Integer,Task> getAllTaskMap() throws TaskManagerException {
+        Map<Integer,Task> taskMap = new HashMap<>();
+        try {
+            String query = "SELECT distinct id FROM task";
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                taskMap.put(resultSet.getInt("id"),getTaskFromId(resultSet.getInt("id")));
+            }
+        }catch (SQLException e){
+            throw new TaskManagerException("sql exception " + e);
         }
         return taskMap;
     }
@@ -69,6 +66,28 @@ public class TaskManager {
             }
         }
     }
+    private Task getTaskFromId(int id) throws TaskManagerException {
+        String email = "";
+        String description = "";
+        String status = "";
+        String place = "";
+        List<Integer> deviceList = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM task WHERE id = " + id;
+            Statement statement1 = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement1.executeQuery(query);
+            while (resultSet.next()){
+                email = resultSet.getString("mail");
+                description = resultSet.getString("description");
+                status = resultSet.getString("status");
+                place = resultSet.getString("place");
+                deviceList.add(resultSet.getInt("id_device"));
+            }
+            return new Task(id,email,description,place,deviceList,status);
+        }catch (SQLException e){
+            throw new TaskManagerException("SQL exception " + e);
+        }
+    }
     private int calculateId() throws TaskManagerException {
         try {
             String query = "SELECT id FROM task ORDER BY id DESC LIMIT 1;";
@@ -80,4 +99,17 @@ public class TaskManager {
             throw new TaskManagerException("SQL exception " + e);
         }
     }
+    private int calculateId(String mail) throws TaskManagerException {
+        try {
+            String query = "SELECT id FROM task WHERE email = '" + mail + "' ORDER BY id DESC LIMIT 1;";
+            Statement statement = dbConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            return resultSet.getInt("id") + 1;
+        }catch (SQLException e){
+            throw new TaskManagerException("SQL exception " + e);
+        }
+    }
+
+
 }
