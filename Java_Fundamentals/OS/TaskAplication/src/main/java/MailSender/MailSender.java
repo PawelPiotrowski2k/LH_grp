@@ -31,7 +31,7 @@ public class MailSender {
                         Message.RecipientType.TO,
                         InternetAddress.parse("wikikarpik08@wp.pl")
                 );
-                message.setSubject("Testowa wiadomość");
+                message.setSubject("Test");
                 message.setText("test");
 
                 Transport.send(message);

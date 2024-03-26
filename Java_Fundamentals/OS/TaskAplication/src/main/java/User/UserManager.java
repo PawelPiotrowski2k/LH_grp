@@ -1,8 +1,6 @@
 package User;
 
 import DBconnection.DbConnection;
-import EncryptionDecryption.Encryption;
-import EncryptionDecryption.EncryptionException;
 import EncryptionDecryption.SaltEncrypting;
 
 import java.sql.PreparedStatement;
@@ -10,9 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class UserManager {
     DbConnection dbConnection = new DbConnection();
@@ -46,11 +42,6 @@ public class UserManager {
         }catch (SQLException e){
             throw new UserManagerException("sql exception " + e);
         }
-    }
-
-    public static void main(String[] args) throws UserManagerException {
-        UserManager userManager = new UserManager();
-        userManager.createUser("Wiktoria","Karpińska","wiktoriakarpinska@gmail.com","8848","admin");
     }
 
     public void createUser(String name, String vorname, String email, String password, String role) throws UserManagerException {

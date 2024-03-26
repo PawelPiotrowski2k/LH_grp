@@ -25,7 +25,7 @@ public class SaltEncrypting {
             return hashedText;
 
         } catch (NoSuchAlgorithmException e) {
-            System.err.println("Nie można znaleźć algorytmu haszującego: " + e.getMessage());
+            System.err.println("No such algorithm " + e.getMessage());
             return null;
         }
     }
@@ -42,7 +42,7 @@ public class SaltEncrypting {
             return hashedText;
 
         } catch (NoSuchAlgorithmException e) {
-            System.err.println("Nie można znaleźć algorytmu haszującego: " + e.getMessage());
+            System.err.println("No such algorithm " + e.getMessage());
             return null;
         }
     }
